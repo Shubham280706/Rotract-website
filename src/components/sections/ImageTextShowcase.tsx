@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { club } from "@/content/club";
 
 export function ImageTextShowcase() {
   return (
@@ -57,7 +58,7 @@ export function ImageTextShowcase() {
         <div className="mt-8 flex items-center gap-3">
           <span className="h-1.5 w-1.5 rotate-45 bg-gold" aria-hidden="true" />
           <span className="mono-label text-[10px] tracking-widest text-white/40">
-            Fellowship Through Service · Established 2026
+            Fellowship Through Service · Established {club.charterYear}
           </span>
           <span className="h-1.5 w-1.5 rotate-45 bg-gold" aria-hidden="true" />
         </div>

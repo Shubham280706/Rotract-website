@@ -9,7 +9,7 @@ export const club = {
 
   sponsorClub: "Rotary Club of Bharuch",
   riDistrict: "3060", // {{FILL: verify RI District — Bharuch is likely 3060}}
-  charterYear: "{{FILL: charter year}}",
+  charterYear: "1984",
   rotaryYear: "2026–27",
 
   // Weekly / regular meeting
