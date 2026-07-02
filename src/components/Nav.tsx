@@ -55,7 +55,12 @@ export function Nav() {
         </ul>
 
         <Magnetic>
-          <a href="#join" className="btn btn-primary hidden md:inline-flex px-6 py-2.5 text-sm">
+          <a 
+            href="https://docs.google.com/forms/d/e/1FAIpQLScdyBV2EqcsHkYlLOlOwfYR2KWfpKIBa55HtzIEPlZLkQj21g/viewform?fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacXMrhXijSbwLbI4RNaACF0QJnGVH2bw0ADAn22m3bXIkkV4YhAG_7UHxr0Rg_aem_SO--CmroTYft_2yJddrSwg" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary hidden md:inline-flex px-6 py-2.5 text-sm"
+          >
             Join us
           </a>
         </Magnetic>

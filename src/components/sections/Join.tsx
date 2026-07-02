@@ -1,36 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, CalendarDays, Clock, MapPin } from "lucide-react";
-import { SectionHeader } from "@/components/SectionHeader";
+import { ArrowRight, CalendarDays, Clock, MapPin, ExternalLink } from "lucide-react";
 import { club } from "@/content/club";
+import { Magnetic } from "@/components/Magnetic";
 
-// If you have a form backend, set its endpoint here. Otherwise the form
-// falls back to opening the visitor's email client (mailto).
-const FORM_ENDPOINT = "{{FILL: form endpoint (Formspree, etc.) — else uses mailto}}";
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScdyBV2EqcsHkYlLOlOwfYR2KWfpKIBa55HtzIEPlZLkQj21g/viewform?fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacXMrhXijSbwLbI4RNaACF0QJnGVH2bw0ADAn22m3bXIkkV4YhAG_7UHxr0Rg_aem_SO--CmroTYft_2yJddrSwg";
 
 export function Join() {
-  const [sent, setSent] = useState(false);
-
-  const usesEndpoint = FORM_ENDPOINT && !FORM_ENDPOINT.includes("{{");
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    if (usesEndpoint) return; // let it POST normally
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const name = String(data.get("name") ?? "");
-    const email = String(data.get("email") ?? "");
-    const message = String(data.get("message") ?? "");
-    const to = club.email.includes("{{") ? "" : club.email;
-    const subject = encodeURIComponent(`Interest in joining — ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\n${message}`
-    );
-    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-    setSent(true);
-  };
-
   return (
     <section
       id="join"
@@ -38,6 +14,7 @@ export function Join() {
     >
       <div className="blueprint absolute inset-0 opacity-[0.06]" aria-hidden />
       <div className="shell relative grid gap-14 py-24 md:py-32 lg:grid-cols-2 lg:gap-20">
+        
         {/* Left: pitch + meeting details */}
         <div>
           <div className="flex items-center gap-3">
@@ -52,7 +29,7 @@ export function Join() {
           <p className="mt-5 max-w-md text-lg leading-relaxed text-paper/75">
             If you&apos;re between 18 and 30 and want to serve, lead, and make
             friends for life — there&apos;s a seat for you. Come to a meeting or
-            send us a note.
+            fill out our membership form online.
           </p>
 
           <dl className="mt-10 space-y-4">
@@ -74,76 +51,34 @@ export function Join() {
           </dl>
         </div>
 
-        {/* Right: interest form */}
-        <div className="border border-white/15 bg-white/[0.03] p-6 sm:p-8">
-          <p className="mono-label text-paper/60">Register interest</p>
-          {sent ? (
-            <div className="mt-6">
-              <p className="display text-2xl">Thanks — your email is ready.</p>
-              <p className="mt-2 text-paper/70">
-                We&apos;ll be in touch soon. See you at a meeting!
-              </p>
-            </div>
-          ) : (
-            <form
-              className="mt-6 space-y-4"
-              onSubmit={onSubmit}
-              action={usesEndpoint ? FORM_ENDPOINT : undefined}
-              method={usesEndpoint ? "POST" : undefined}
-            >
-              <Field label="Name" name="name" type="text" />
-              <Field label="Email" name="email" type="email" />
-              <div>
-                <label htmlFor="message" className="mono-label text-paper/60">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
-                  placeholder="Tell us a little about yourself"
-                  className="mt-2 w-full resize-none rounded-[2px] border border-white/20 bg-transparent px-4 py-3 text-paper placeholder:text-paper/40"
-                />
-              </div>
-              <button type="submit" className="btn btn-primary w-full justify-center">
-                Send interest
-                <ArrowRight className="h-4 w-4" />
-              </button>
-              <p className="mono-label text-paper/40">
-                {usesEndpoint
-                  ? "Submits securely to the club."
-                  : "Opens your email app addressed to the club."}
-              </p>
-            </form>
-          )}
+        {/* Right: call-to-action to Google Form */}
+        <div className="flex flex-col justify-center border border-white/15 bg-white/[0.03] p-8 sm:p-10 rounded-[4px] relative z-10">
+          <span className="mono-label text-gold text-xs tracking-wider">Membership</span>
+          <h3 className="display mt-4 text-3xl md:text-4xl text-paper">Ready to Join?</h3>
+          <p className="mt-4 text-base leading-relaxed text-paper/70">
+            We collect membership applications online through our official Google Form. Click the button below to register your details, tell us about your interests, and join Rotaract Club of Bharuch!
+          </p>
+
+          <div className="mt-8">
+            <Magnetic>
+              <a
+                href={GOOGLE_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold shadow-[0_4px_20px_rgba(0,95,204,0.25)] hover:shadow-[0_4px_30px_rgba(0,95,204,0.4)] transition-shadow duration-300"
+              >
+                Fill Membership Form
+                <ExternalLink className="h-5 w-5" />
+              </a>
+            </Magnetic>
+          </div>
+
+          <p className="mono-label text-[10px] text-paper/40 mt-6 tracking-wide">
+            * Opens Google Forms in a secure new tab.
+          </p>
         </div>
+
       </div>
     </section>
-  );
-}
-
-function Field({
-  label,
-  name,
-  type,
-}: {
-  label: string;
-  name: string;
-  type: string;
-}) {
-  return (
-    <div>
-      <label htmlFor={name} className="mono-label text-paper/60">
-        {label}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        required
-        className="mt-2 w-full rounded-[2px] border border-white/20 bg-transparent px-4 py-3 text-paper placeholder:text-paper/40"
-      />
-    </div>
   );
 }
