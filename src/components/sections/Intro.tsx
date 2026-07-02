@@ -106,7 +106,7 @@ export function Intro() {
           className="relative max-w-4xl w-full"
         >
           {/* Glass Card */}
-          <div className="relative backdrop-blur-xl bg-white/[0.12] border border-white/[0.18] rounded-xl p-8 md:p-12 lg:p-14 shadow-[0_32px_80px_rgba(0,0,0,0.35)]">
+          <div className="relative backdrop-blur-xl bg-white/[0.12] border border-white/[0.18] rounded-xl px-5 py-8 sm:p-10 md:p-12 lg:p-14 shadow-[0_32px_80px_rgba(0,0,0,0.35)]">
             {/* Subtle inner glow */}
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.08] via-transparent to-royal/[0.06] pointer-events-none" />
 
@@ -147,7 +147,7 @@ export function Intro() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.9, duration: 0.6 }}
-              className="relative z-10 flex items-center justify-center gap-6 md:gap-10 mt-6 pt-6 border-t border-white/[0.1]"
+              className="relative z-10 flex items-center justify-center gap-1 sm:gap-6 md:gap-10 mt-6 pt-6 border-t border-white/[0.1]"
             >
               {pillars.map((p, i) => (
                 <motion.div
@@ -157,10 +157,10 @@ export function Intro() {
                   transition={{ delay: 1 + i * 0.1, duration: 0.4 }}
                   className="flex flex-col items-center gap-2 group"
                 >
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/[0.08] border border-white/[0.12] flex items-center justify-center group-hover:bg-white/[0.15] group-hover:border-gold-light/30 transition-all duration-300">
+                  <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-white/[0.08] border border-white/[0.12] flex items-center justify-center group-hover:bg-white/[0.15] group-hover:border-gold-light/30 transition-all duration-300">
                     <p.icon className="h-4 w-4 md:h-5 md:w-5 text-gold-light" />
                   </div>
-                  <span className="mono-label text-[9px] md:text-[10px] text-white/50 tracking-widest font-bold">
+                  <span className="mono-label text-[8px] md:text-[10px] text-white/50 tracking-normal md:tracking-widest font-bold">
                     {p.label}
                   </span>
                 </motion.div>
