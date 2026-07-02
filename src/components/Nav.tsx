@@ -27,26 +27,26 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-paper/90 backdrop-blur-sm border-b border-neutral"
-          : "bg-transparent"
+          ? "bg-paper/95 backdrop-blur-md border-b border-neutral shadow-sm py-1"
+          : "bg-transparent py-2"
       }`}
     >
-      <nav className="shell flex h-16 items-center justify-between">
-        <a href="#top" className="flex items-center gap-2.5">
-          <Gear className="h-7 w-7 text-royal" spinClass="gear-spin" />
-          <span className="display text-[1.05rem] leading-none text-ink">
+      <nav className="shell flex h-16 md:h-20 items-center justify-between transition-all duration-300">
+        <a href="#top" className="flex items-center gap-3 group">
+          <Gear className="h-8 w-8 text-royal group-hover:scale-105 transition-transform duration-300" spinClass="gear-spin" />
+          <span className="display text-lg md:text-xl font-bold leading-none text-ink tracking-tight">
             Rotaract Bharuch
           </span>
         </a>
 
-        <ul className="hidden items-center gap-7 md:flex">
+        <ul className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="mono-label text-ink/70 transition-colors hover:text-azure"
+                className="mono-label text-ink font-semibold text-xs tracking-wider transition-colors hover:text-azure"
               >
                 {l.label}
               </a>
@@ -55,7 +55,7 @@ export function Nav() {
         </ul>
 
         <Magnetic>
-          <a href="#join" className="btn btn-primary hidden md:inline-flex">
+          <a href="#join" className="btn btn-primary hidden md:inline-flex px-6 py-2.5 text-sm">
             Join us
           </a>
         </Magnetic>
