@@ -6,7 +6,7 @@ import { club } from "@/content/club";
 export function ImageTextShowcase() {
   return (
     <section 
-      className="relative bg-[#030810] py-24 md:py-32 overflow-hidden border-t border-white/[0.04]"
+      className="relative bg-[#2d0a1e] py-24 md:py-32 overflow-hidden border-t border-white/[0.04]"
       style={{ ["--image-fill" as string]: "url('/projects/charter-installation-ceremony-1.png')" }}
     >
       {/* Blueprint lines watermark in background */}

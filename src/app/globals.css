@@ -5,20 +5,20 @@
    ============================================================ */
 
 @theme {
-  /* Refined Palette — deep majestical blue + paper base; rich compliant gold is a spice */
-  --color-royal: #0c3374;        /* Deeper, richer royal blue for solid AAA contrast */
-  --color-azure: #005fcc;        /* High-fidelity electric blue for active text & links */
-  --color-gold: #c68300;         /* Rich burnished gold (safe 4.5:1 ratio on light surfaces) */
-  --color-gold-light: #f9b83f;   /* Bright gold for borders and fills on dark surfaces */
-  --color-paper: #fafafa;        /* Clean, high-brightness alabaster paper background */
-  --color-ink: #050d1a;          /* Deep midnight slate for crisp type readability */
-  --color-neutral: #e2e8f0;      /* Modern light silver-grey border color for clean lines */
+  /* Pink & White Theme — vibrant rose palette with clean white base */
+  --color-royal: #c2185b;        /* Deep rose pink — primary brand color */
+  --color-azure: #e91e63;        /* Vibrant pink for active text & links */
+  --color-gold: #ad1457;         /* Rich magenta for accent highlights */
+  --color-gold-light: #f48fb1;   /* Soft pink for borders and fills on dark surfaces */
+  --color-paper: #ffffff;        /* Pure white background */
+  --color-ink: #1a1a2e;          /* Deep dark navy-purple for crisp type readability */
+  --color-neutral: #f0e4e8;      /* Soft rose-tinted grey border color */
 
   /* Tints used sparingly for surfaces */
-  --color-royal-050: #f0f4fa;    /* Ultra-light cool blue surface tint */
-  --color-royal-900: #061c42;    /* Deep night navy surface */
-  --color-midnight: #040a15;     /* Dark telemetry section background */
-  --color-midnight-card: #0c1f38;/* Dark telemetry card background */
+  --color-royal-050: #fce4ec;    /* Ultra-light pink surface tint */
+  --color-royal-900: #880e4f;    /* Deep rose-wine surface */
+  --color-midnight: #2d0a1e;     /* Dark section background (rose-tinted) */
+  --color-midnight-card: #3d1228;/* Dark card background (rose-tinted) */
 
   /* Typography */
   --font-display: var(--font-display), "Bricolage Grotesque", sans-serif;
@@ -250,4 +250,19 @@ select:focus-visible {
 
 .animate-text-bg-scroll {
   animation: text-bg-scroll 24s ease-in-out infinite;
+}
+
+/* 3D Flip Card Helpers */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.rotateY-180 {
+  transform: rotateY(180deg);
 }

@@ -33,15 +33,25 @@ export function Nav() {
           : "bg-transparent py-2"
       }`}
     >
-      <nav className="shell flex h-16 md:h-20 items-center justify-between transition-all duration-300">
-        <a href="#top" className="flex items-center gap-3 group">
-          <Gear className="h-8 w-8 text-royal group-hover:scale-105 transition-transform duration-300" spinClass="gear-spin" />
-          <span className="display text-lg md:text-xl font-bold leading-none text-ink tracking-tight">
-            Rotaract Bharuch
-          </span>
+      <nav className="shell relative flex h-20 md:h-24 items-center justify-between transition-all duration-300">
+        <a href="#top" className="flex items-center group h-full">
+          {/* We point this to /logo.png. Please drop your original logo image into the public/ folder as logo.png! */}
+          <img 
+            src="/logo.png" 
+            alt="Rotaract Bharuch Logo" 
+            className="h-[240px] md:h-[320px] -my-[90px] md:-my-[120px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            onError={(e) => {
+              // Fallback text if the image is missing from the public folder
+              e.currentTarget.style.display = 'none';
+              e.currentTarget.parentElement?.insertAdjacentHTML(
+                'beforeend', 
+                `<span class="display text-lg md:text-xl font-bold text-ink">Please add logo.png to public/</span>`
+              );
+            }}
+          />
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="absolute left-1/2 -translate-x-1/2 hidden items-center gap-8 md:flex">
           {links.map((l) => (
             <li key={l.href}>
               <a

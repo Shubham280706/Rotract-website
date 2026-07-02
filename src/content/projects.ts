@@ -20,9 +20,39 @@ export type Project = {
   summary: string;
   impact?: string;
   images: string[];
+  isSignature?: boolean;
 };
 
 export const projects: Project[] = [
+  {
+    slug: "spice-of-bharuch",
+    title: "Spice of Bharuch (SOB)",
+    avenue: "Community",
+    date: "Annual Signature Event",
+    summary:
+      "Our premier food festival and cultural fundraiser showcasing Bharuch's local culinary heritage. It attracts thousands of visitors and raises funds for local community development projects.",
+    impact: "Signature Project · 5,000+ Attendees",
+    isSignature: true,
+    images: [
+      "{{FILL: photo 1}}", "{{FILL: photo 2}}", "{{FILL: photo 3}}", "{{FILL: photo 4}}",
+      "{{FILL: photo 5}}", "{{FILL: photo 6}}", "{{FILL: photo 7}}", "{{FILL: photo 8}}",
+      "{{FILL: photo 9}}", "{{FILL: photo 10}}"
+    ],
+  },
+  {
+    slug: "local-for-vocal",
+    title: "Local For Vocal",
+    avenue: "Community",
+    date: "Annual Signature Event",
+    summary:
+      "A marketplace initiative promoting local artisans, small-scale business owners, and cottage industries from Bharuch. We help them expand their reach and digitize their business.",
+    impact: "Signature Project · 50+ Local Vendors Supported",
+    isSignature: true,
+    images: [
+      "{{FILL: photo 1}}", "{{FILL: photo 2}}", "{{FILL: photo 3}}", "{{FILL: photo 4}}",
+      "{{FILL: photo 5}}", "{{FILL: photo 6}}", "{{FILL: photo 7}}", "{{FILL: photo 8}}"
+    ],
+  },
   {
     slug: "community-blood-donation-drive",
     title: "Community Blood Donation Drive",

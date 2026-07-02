@@ -16,9 +16,10 @@ export type TeamMember = {
 
 export const team: TeamMember[] = [
   // ---- Office bearers ----
-  { name: "{{FILL: name}}", role: "President", order: 1, isBoard: true, photo: null },
+  { name: "Rtr. Bhavya Samirkumar Shah", role: "District Rotaract Representative (DRR)", order: 0, isBoard: true, photo: null },
+  { name: "Rtr. Dixil Waghela", role: "President", order: 1, isBoard: true, photo: "/president.jpeg" },
   { name: "{{FILL: name}}", role: "Vice President", order: 2, isBoard: true, photo: null },
-  { name: "{{FILL: name}}", role: "Secretary", order: 3, isBoard: true, photo: null },
+  { name: "Rtr. Het Parikh", role: "Secretary", order: 3, isBoard: true, photo: null },
   { name: "{{FILL: name}}", role: "Treasurer", order: 4, isBoard: true, photo: null },
   { name: "{{FILL: name}}", role: "Sergeant-at-Arms", order: 5, isBoard: true, photo: null },
   { name: "{{FILL: name}}", role: "Director — Community Service", order: 6, isBoard: true, photo: null },

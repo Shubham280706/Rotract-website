@@ -35,7 +35,8 @@ export function Hero() {
       <div className="shell relative flex min-h-[100svh] flex-col justify-center pt-28 pb-20">
         <p className="mono-label max-w-2xl text-royal">
           Sponsored by {club.sponsorClub} · RI District {club.riDistrict} · Rotary
-          Year {club.rotaryYear}
+          Year {club.rotaryYear} · Club ID {club.clubId} · Chartered{" "}
+          {club.charterDate}
         </p>
 
         <h1 className="display mt-6 max-w-4xl text-[clamp(2.9rem,9vw,6.6rem)] text-ink">

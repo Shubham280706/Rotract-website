@@ -19,8 +19,8 @@ export function Marquee() {
   return (
     <div className="relative w-full overflow-hidden bg-royal py-5 border-y border-white/10 select-none">
       {/* Side gradient overlays to create soft fade bounds */}
-      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0c3374] to-transparent z-10 pointer-events-none" aria-hidden="true" />
-      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0c3374] to-transparent z-10 pointer-events-none" aria-hidden="true" />
+      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#c2185b] to-transparent z-10 pointer-events-none" aria-hidden="true" />
+      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#c2185b] to-transparent z-10 pointer-events-none" aria-hidden="true" />
 
       <div className="flex whitespace-nowrap min-w-full">
         {/* Animated text tracks running side-by-side to form a seamless loop */}

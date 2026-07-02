@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-type Aspect = "4/5" | "16/9" | "1/1" | "3/2" | "5/4";
+type Aspect = "4/5" | "16/9" | "1/1" | "3/2" | "5/4" | "2/3";
 
 const aspectClass: Record<Aspect, string> = {
   "4/5": "aspect-[4/5]",
@@ -8,6 +8,7 @@ const aspectClass: Record<Aspect, string> = {
   "1/1": "aspect-square",
   "3/2": "aspect-[3/2]",
   "5/4": "aspect-[5/4]",
+  "2/3": "aspect-[2/3]",
 };
 
 /**

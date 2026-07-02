@@ -12,42 +12,42 @@ export function Impact() {
   return (
     <section
       id="impact"
-      className="relative bg-royal text-paper"
-      style={{ ["--gear-bg" as string]: "var(--color-royal)" }}
+      className="relative bg-royal-050 text-ink border-t border-neutral"
+      style={{ ["--gear-bg" as string]: "var(--color-royal-050)" }}
     >
       <div className="shell py-24 md:py-32">
         <div className="max-w-3xl">
           <div className="flex items-center gap-3">
-            <span className="h-2 w-2 rotate-45 bg-gold" aria-hidden />
-            <span className="mono-label text-gold">
+            <span className="h-2 w-2 rotate-45 bg-royal" aria-hidden />
+            <span className="mono-label text-royal font-bold tracking-wider">
               Impact · Rotary Year {club.rotaryYear}
             </span>
           </div>
-          <h2 className="display mt-4 text-[clamp(2.8rem,6vw,4.2rem)] leading-tight">
+          <h2 className="display mt-4 text-[clamp(2.8rem,6vw,4.2rem)] leading-tight text-ink">
             Service, measured.
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-paper/75">
+          <p className="mt-5 text-lg leading-relaxed text-ink/75">
             The work adds up. Here is what the club has put on the ground —
             confirm the figures before launch.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-px overflow-hidden border border-white/15 bg-white/15 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-px overflow-hidden border border-neutral/60 bg-neutral/60 sm:grid-cols-2 lg:grid-cols-3">
           {stats.map((s, i) => (
             <Reveal
               key={s.label}
               index={i}
-              className="group bg-royal p-7"
+              className="group bg-paper p-7"
             >
-              <div className="h-px w-8 bg-gold transition-all duration-300 group-hover:w-14" aria-hidden />
-              <div className="display mt-5 text-[clamp(2.6rem,6vw,4rem)] leading-none">
+              <div className="h-px w-8 bg-royal transition-all duration-300 group-hover:w-14" aria-hidden />
+              <div className="display mt-5 text-[clamp(2.6rem,6vw,4rem)] leading-none text-royal">
                 <Counter value={s.value} prefix={s.prefix} suffix={s.suffix} />
               </div>
-              <div className="mt-3 text-sm font-medium text-paper/85">
+              <div className="mt-3 text-sm font-semibold text-ink/80">
                 {s.label}
               </div>
               {s.note && (
-                <div className="mono-label mt-1 text-paper/40">{s.note}</div>
+                <div className="mono-label mt-1 text-ink/50">{s.note}</div>
               )}
             </Reveal>
           ))}

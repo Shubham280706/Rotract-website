@@ -21,7 +21,7 @@ export function Join() {
             <span className="h-2 w-2 rotate-45 bg-gold" aria-hidden />
             <span className="mono-label text-gold">Get involved</span>
           </div>
-          <h2 className="display mt-4 text-[clamp(2rem,5vw,3.4rem)]">
+          <h2 className="display mt-4 text-[clamp(2rem,5vw,3.4rem)] text-paper">
             Bring your energy.
             <br />
             Leave your mark.
@@ -65,7 +65,7 @@ export function Join() {
                 href={GOOGLE_FORM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold shadow-[0_4px_20px_rgba(0,95,204,0.25)] hover:shadow-[0_4px_30px_rgba(0,95,204,0.4)] transition-shadow duration-300"
+                className="btn btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold shadow-[0_4px_20px_rgba(194,24,91,0.15)] hover:shadow-[0_4px_30px_rgba(194,24,91,0.25)] transition-shadow duration-300"
               >
                 Fill Membership Form
                 <ExternalLink className="h-5 w-5" />
