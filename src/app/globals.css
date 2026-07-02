@@ -1,26 +1,236 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Rotaract Club of Bharuch — "People of Action" design system
+   ============================================================ */
+
+@theme {
+  /* Refined Palette — deep majestical blue + paper base; rich compliant gold is a spice */
+  --color-royal: #0c3374;        /* Deeper, richer royal blue for solid AAA contrast */
+  --color-azure: #005fcc;        /* High-fidelity electric blue for active text & links */
+  --color-gold: #c68300;         /* Rich burnished gold (safe 4.5:1 ratio on light surfaces) */
+  --color-gold-light: #f9b83f;   /* Bright gold for borders and fills on dark surfaces */
+  --color-paper: #fafafa;        /* Clean, high-brightness alabaster paper background */
+  --color-ink: #050d1a;          /* Deep midnight slate for crisp type readability */
+  --color-neutral: #e2e8f0;      /* Modern light silver-grey border color for clean lines */
+
+  /* Tints used sparingly for surfaces */
+  --color-royal-050: #f0f4fa;    /* Ultra-light cool blue surface tint */
+  --color-royal-900: #061c42;    /* Deep night navy surface */
+  --color-midnight: #040a15;     /* Dark telemetry section background */
+  --color-midnight-card: #0c1f38;/* Dark telemetry card background */
+
+  /* Typography */
+  --font-display: var(--font-display), "Bricolage Grotesque", sans-serif;
+  --font-body: var(--font-body), "Hanken Grotesk", sans-serif;
+  --font-mono: var(--font-mono), "IBM Plex Mono", monospace;
+
+  /* Motion — never ease-in on UI */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --shell: 1180px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  border-color: var(--color-neutral);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* ---------- Structural helpers ---------- */
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Mono structural label — encodes real facts (district / charter / year) */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+  font-weight: 700;
+}
+
+/* Blueprint grid texture — engineered feel, not a gradient blob */
+.blueprint {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-royal) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-royal) 8%, transparent) 1px, transparent 1px);
+  background-size: 44px 44px;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 2px;
+  transition:
+    transform 0.18s var(--ease-out),
+    background-color 0.18s var(--ease-out),
+    color 0.18s var(--ease-out),
+    border-color 0.18s var(--ease-out);
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--color-royal);
+  color: var(--color-paper);
+  border: 1px solid var(--color-royal);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1px solid var(--color-ink);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background: var(--color-azure);
+    border-color: var(--color-azure);
+  }
+  .btn-secondary:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+}
+
+/* Focus states — always visible */
+a,
+button,
+input,
+textarea,
+select {
+  outline: none;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--color-azure);
+  outline-offset: 2px;
+}
+
+/* ---------- Ambient gear rotation (off main thread) ---------- */
+@keyframes gear-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.gear-spin {
+  animation: gear-spin 90s linear infinite;
+  transform-origin: center;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+.gear-spin-reverse {
+  animation: gear-spin 120s linear infinite reverse;
+  transform-origin: center;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .gear-spin,
+  .gear-spin-reverse {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Hide scrollbar on horizontal strips */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glass Shine Sweep Hover Effect */
+.glass-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-shine::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 30%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.glass-shine:hover::after {
+  transform: translate(450%, -20%) rotate(30deg);
 }
