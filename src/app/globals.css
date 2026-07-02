@@ -234,3 +234,20 @@ select:focus-visible {
 .glass-shine:hover::after {
   transform: translate(450%, -20%) rotate(30deg);
 }
+
+/* Text Background Scroll Animation */
+@keyframes text-bg-scroll {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-text-bg-scroll {
+  animation: text-bg-scroll 24s ease-in-out infinite;
+}

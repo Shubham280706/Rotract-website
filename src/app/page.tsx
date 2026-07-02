@@ -10,6 +10,7 @@ import { Join } from "@/components/sections/Join";
 import { Footer } from "@/components/sections/Footer";
 import { HashCleaner } from "@/components/HashCleaner";
 import { Marquee } from "@/components/Marquee";
+import { ImageTextShowcase } from "@/components/sections/ImageTextShowcase";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <Events />
         <Sponsors />
         <Join />
+        <ImageTextShowcase />
       </main>
       <Footer />
     </>
