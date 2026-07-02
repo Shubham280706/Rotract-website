@@ -26,8 +26,8 @@ export default function Home() {
         <Team />
         <Events />
         <Sponsors />
-        <Join />
         <ImageTextShowcase />
+        <Join />
       </main>
       <Footer />
     </>
