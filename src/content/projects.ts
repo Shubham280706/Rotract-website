@@ -23,6 +23,15 @@ export type Project = {
   isSignature?: boolean;
 };
 
+/**
+ * HOW TO ADD PROJECT PHOTOS:
+ * 1. Drop photos into /public/projects/<slug>/ folder
+ * 2. Name them 1.jpg, 2.jpg, 3.jpg ... (order = display order)
+ * 3. Add the paths here in the images array
+ * 4. Push to Git — website updates automatically
+ *
+ * Example: /public/projects/spice-of-bharuch/1.jpg → "/projects/spice-of-bharuch/1.jpg"
+ */
 export const projects: Project[] = [
   {
     slug: "spice-of-bharuch",
@@ -33,10 +42,9 @@ export const projects: Project[] = [
       "Our premier food festival and cultural fundraiser showcasing Bharuch's local culinary heritage. It attracts thousands of visitors and raises funds for local community development projects.",
     impact: "Signature Project · 5,000+ Attendees",
     isSignature: true,
+    // Drop photos in /public/projects/spice-of-bharuch/ then add paths below
     images: [
-      "{{FILL: photo 1}}", "{{FILL: photo 2}}", "{{FILL: photo 3}}", "{{FILL: photo 4}}",
-      "{{FILL: photo 5}}", "{{FILL: photo 6}}", "{{FILL: photo 7}}", "{{FILL: photo 8}}",
-      "{{FILL: photo 9}}", "{{FILL: photo 10}}"
+      // "/projects/spice-of-bharuch/1.jpg",
     ],
   },
   {
@@ -48,9 +56,9 @@ export const projects: Project[] = [
       "A marketplace initiative promoting local artisans, small-scale business owners, and cottage industries from Bharuch. We help them expand their reach and digitize their business.",
     impact: "Signature Project · 50+ Local Vendors Supported",
     isSignature: true,
+    // Drop photos in /public/projects/local-for-vocal/ then add paths below
     images: [
-      "{{FILL: photo 1}}", "{{FILL: photo 2}}", "{{FILL: photo 3}}", "{{FILL: photo 4}}",
-      "{{FILL: photo 5}}", "{{FILL: photo 6}}", "{{FILL: photo 7}}", "{{FILL: photo 8}}"
+      // "/projects/local-for-vocal/1.jpg",
     ],
   },
   {
@@ -61,10 +69,9 @@ export const projects: Project[] = [
     summary:
       "A single-day donation camp run with local hospitals to shore up the district blood bank ahead of peak demand.",
     impact: "{{FILL: e.g. 120 units collected}}",
+    // Drop photos in /public/projects/community-blood-donation-drive/ then add paths below
     images: [
-      "{{FILL: photo 1}}", "{{FILL: photo 2}}", "{{FILL: photo 3}}", "{{FILL: photo 4}}",
-      "{{FILL: photo 5}}", "{{FILL: photo 6}}", "{{FILL: photo 7}}", "{{FILL: photo 8}}",
-      "{{FILL: photo 9}}", "{{FILL: photo 10}}", "{{FILL: photo 11}}", "{{FILL: photo 12}}"
+      // "/projects/community-blood-donation-drive/1.jpg",
     ],
   },
   {
@@ -75,9 +82,9 @@ export const projects: Project[] = [
     summary:
       "Résumé, interview, and communication sessions for final-year students, led by working professionals from the club's network.",
     impact: "{{FILL: e.g. 80 students trained}}",
+    // Drop photos in /public/projects/skill-up-career-workshop/ then add paths below
     images: [
-      "{{FILL: photo 1}}", "{{FILL: photo 2}}", "{{FILL: photo 3}}", "{{FILL: photo 4}}",
-      "{{FILL: photo 5}}", "{{FILL: photo 6}}", "{{FILL: photo 7}}", "{{FILL: photo 8}}"
+      // "/projects/skill-up-career-workshop/1.jpg",
     ],
   },
   {
@@ -88,11 +95,10 @@ export const projects: Project[] = [
     summary:
       "The annual installation marking the new Rotary year, welcoming incoming office bearers and members.",
     impact: "{{FILL: e.g. new board installed}}",
+    // Drop photos in /public/projects/charter-installation-ceremony/ then add paths below
     images: [
-      "{{FILL: photo 1}}", "{{FILL: photo 2}}", "{{FILL: photo 3}}", "{{FILL: photo 4}}",
-      "{{FILL: photo 5}}", "{{FILL: photo 6}}", "{{FILL: photo 7}}", "{{FILL: photo 8}}",
-      "{{FILL: photo 9}}", "{{FILL: photo 10}}", "{{FILL: photo 11}}", "{{FILL: photo 12}}",
-      "{{FILL: photo 13}}", "{{FILL: photo 14}}", "{{FILL: photo 15}}"
+      "/projects/charter-installation-ceremony/1.png",
+      "/projects/charter-installation-ceremony/2.png",
     ],
   },
   {
@@ -103,10 +109,9 @@ export const projects: Project[] = [
     summary:
       "A morning cleanup along the Narmada riverfront, pairing waste collection with an awareness walk on plastic use.",
     impact: "{{FILL: e.g. 300 kg waste removed}}",
+    // Drop photos in /public/projects/clean-narmada-riverfront/ then add paths below
     images: [
-      "{{FILL: photo 1}}", "{{FILL: photo 2}}", "{{FILL: photo 3}}", "{{FILL: photo 4}}",
-      "{{FILL: photo 5}}", "{{FILL: photo 6}}", "{{FILL: photo 7}}", "{{FILL: photo 8}}",
-      "{{FILL: photo 9}}", "{{FILL: photo 10}}"
+      // "/projects/clean-narmada-riverfront/1.jpg",
     ],
   },
   {
@@ -117,9 +122,9 @@ export const projects: Project[] = [
     summary:
       "A joint virtual meet with a partner Rotaract club abroad to share project ideas and build lasting friendships across borders.",
     impact: "{{FILL: e.g. partner club paired}}",
+    // Drop photos in /public/projects/international-fellowship-exchange/ then add paths below
     images: [
-      "{{FILL: photo 1}}", "{{FILL: photo 2}}", "{{FILL: photo 3}}", "{{FILL: photo 4}}",
-      "{{FILL: photo 5}}", "{{FILL: photo 6}}"
+      // "/projects/international-fellowship-exchange/1.jpg",
     ],
   },
   {
@@ -130,11 +135,9 @@ export const projects: Project[] = [
     summary:
       "Blankets and warm clothing distributed to families and street communities across Bharuch during the cold season.",
     impact: "{{FILL: e.g. 250 blankets given}}",
+    // Drop photos in /public/projects/winter-warmth-distribution/ then add paths below
     images: [
-      "{{FILL: photo 1}}", "{{FILL: photo 2}}", "{{FILL: photo 3}}", "{{FILL: photo 4}}",
-      "{{FILL: photo 5}}", "{{FILL: photo 6}}", "{{FILL: photo 7}}", "{{FILL: photo 8}}",
-      "{{FILL: photo 9}}", "{{FILL: photo 10}}", "{{FILL: photo 11}}", "{{FILL: photo 12}}",
-      "{{FILL: photo 13}}", "{{FILL: photo 14}}"
+      // "/projects/winter-warmth-distribution/1.jpg",
     ],
   },
 ];

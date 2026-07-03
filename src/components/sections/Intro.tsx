@@ -11,8 +11,8 @@ const collageImages = [
   { src: "/intro/charity.png", alt: "Charity distribution", row: 2 },
   { src: "/intro/festival.png", alt: "Food festival event", row: 2 },
   { src: "/intro/environment.png", alt: "Tree planting initiative", row: 2 },
-  { src: "/projects/charter-installation-ceremony-1.png", alt: "Charter ceremony", row: 3 },
-  { src: "/projects/charter-installation-ceremony-2.png", alt: "Installation ceremony", row: 3 },
+  { src: "/projects/charter-installation-ceremony/1.png", alt: "Charter ceremony", row: 3 },
+  { src: "/projects/charter-installation-ceremony/2.png", alt: "Installation ceremony", row: 3 },
 ];
 
 const pillars = [

@@ -7,7 +7,7 @@ export function ImageTextShowcase() {
   return (
     <section 
       className="relative bg-[#2d0a1e] py-24 md:py-32 overflow-hidden border-t border-white/[0.04]"
-      style={{ ["--image-fill" as string]: "url('/projects/charter-installation-ceremony-1.png')" }}
+      style={{ ["--image-fill" as string]: "url('/projects/charter-installation-ceremony/1.png')" }}
     >
       {/* Blueprint lines watermark in background */}
       <div className="blueprint absolute inset-0 opacity-[0.02] pointer-events-none" aria-hidden="true" />

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sips -g pixelWidth -g pixelHeight public/logo.png)",
+      "Bash(curl -s http://localhost:3000)"
+    ]
+  }
+}

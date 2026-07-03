@@ -12,7 +12,6 @@ import { HashCleaner } from "@/components/HashCleaner";
 import { Marquee } from "@/components/Marquee";
 import { Intro } from "@/components/sections/Intro";
 import { ImageTextShowcase } from "@/components/sections/ImageTextShowcase";
-import { StackReveal } from "@/components/StackReveal";
 
 export default function Home() {
   return (
@@ -22,7 +21,8 @@ export default function Home() {
       <main className="min-h-screen">
         <Hero />
         <Marquee />
-        <StackReveal base={<Intro />} top={<Projects />} revealVh={140} />
+        <Intro />
+        <Projects />
         <About />
         <Impact />
         <Team />
