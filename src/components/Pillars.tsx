@@ -12,8 +12,8 @@ const pillars = [
     description:
       "Hands-on projects that meet real needs in Bharuch — blood drives, health checkups, cleanups, and winter warmth distributions.",
     icon: Heart,
-    ringColor: "var(--color-azure)",
-    ringTrack: "rgba(0, 95, 204, 0.10)",
+    ringColor: "#e11d48",
+    ringTrack: "rgba(225, 29, 72, 0.10)",
     percent: 90,
   },
   {
@@ -24,8 +24,8 @@ const pillars = [
     description:
       "Run community projects, manage a board and budget, and develop professional public speaking and team management skills.",
     icon: Users,
-    ringColor: "var(--color-gold)",
-    ringTrack: "rgba(198, 131, 0, 0.10)",
+    ringColor: "#f59e0b",
+    ringTrack: "rgba(245, 158, 11, 0.12)",
     percent: 80,
   },
   {
@@ -36,8 +36,8 @@ const pillars = [
     description:
       "Build friendships through working side-by-side. Access a global network of 250,000+ Rotaractors across 180 countries.",
     icon: Globe,
-    ringColor: "var(--color-royal)",
-    ringTrack: "rgba(12, 51, 116, 0.10)",
+    ringColor: "#0891b2",
+    ringTrack: "rgba(8, 145, 178, 0.10)",
     percent: 85,
   },
 ];
