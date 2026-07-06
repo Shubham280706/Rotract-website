@@ -7,6 +7,7 @@ import { parentClub, localSponsors } from "@/content/sponsors";
 
 export function Sponsors() {
   const parentUrl = parentClub.url && !parentClub.url.includes("{{") ? parentClub.url : null;
+  const hasLogo = !!parentClub.logo;
 
   return (
     <section className="border-t border-neutral py-24 md:py-32">
@@ -18,13 +19,16 @@ export function Sponsors() {
 
         {/* Parent club feature */}
         <Reveal>
-          <div className="mt-10 grid gap-8 border border-royal/25 bg-royal-050 p-7 sm:grid-cols-[auto_1fr] sm:items-center sm:p-9">
-            <div
-              className="mx-auto h-28 w-28 text-royal sm:mx-0"
-              style={{ ["--gear-bg" as string]: "var(--color-royal-050)" }}
-            >
-              <Gear className="h-full w-full" spinClass="gear-spin" />
-            </div>
+          <div className={`mt-10 grid gap-8 border border-royal/25 bg-royal-050 p-7 sm:p-9 ${hasLogo ? "sm:grid-cols-[auto_1fr] sm:items-center" : "grid-cols-1"}`}>
+            {hasLogo && (
+              <div className="mx-auto h-36 w-36 sm:mx-0 flex items-center justify-center">
+                <img
+                  src={parentClub.logo!}
+                  alt={parentClub.name}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            )}
             <div>
               <span className="mono-label text-royal">Sponsor club</span>
               <h3 className="display mt-2 text-2xl text-ink sm:text-3xl">
@@ -46,19 +50,8 @@ export function Sponsors() {
             </div>
           </div>
         </Reveal>
-
-        {/* Local sponsors */}
-        <div className="mt-12">
-          <p className="mono-label text-ink/50">With support from</p>
-          <ul className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {localSponsors.map((s, i) => (
-              <Reveal key={i} index={i} as="li" className="group hover:-translate-y-1 hover:shadow-[0_6px_20px_rgba(10,22,40,0.04)] transition-all duration-300 ease-out">
-                <ImageSlot src={s.logo} label={s.name.includes("{{") ? "Sponsor logo" : s.name} aspect="3/2" />
-              </Reveal>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );
 }
+

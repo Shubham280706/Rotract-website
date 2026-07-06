@@ -88,7 +88,7 @@ function PillarRing({
 
   return (
     <motion.div
-      className="group flex flex-col items-center text-center h-full justify-between glass-shine p-6 rounded-[6px] border border-transparent hover:border-neutral transition-colors duration-300"
+      className="group flex flex-col items-center text-center h-full justify-between bg-paper p-6 rounded-xl border border-neutral/60 hover:border-royal/30 shadow-[0_4px_20px_rgba(10,22,40,0.02)] hover:shadow-[0_20px_40px_rgba(194,24,91,0.05)] transition-all duration-300"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

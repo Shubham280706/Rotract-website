@@ -11,7 +11,7 @@ import { Magnetic } from "@/components/Magnetic";
 function MemberCard({ m, index, isLarge = false }: { m: TeamMember; index: number; isLarge?: boolean }) {
   return (
     <Reveal index={index} as="li" className="group">
-      <ImageSlot src={m.photo} label={m.role} aspect={isLarge ? "2/3" : "4/5"} alt={m.name} />
+      <ImageSlot src={m.photo} label={m.role} aspect="4/5" alt={m.name} />
       <div className="mt-3">
         <div className="flex items-start justify-between gap-2">
           <h3 className={`display leading-tight text-ink ${isLarge ? "text-xl md:text-2xl font-bold" : "text-lg"}`}>{m.name}</h3>

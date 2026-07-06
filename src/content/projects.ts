@@ -20,6 +20,7 @@ export type Project = {
   summary: string;
   impact?: string;
   images: string[];
+  video?: string;
   isSignature?: boolean;
 };
 
@@ -31,113 +32,93 @@ export type Project = {
  * 4. Push to Git — website updates automatically
  *
  * Example: /public/projects/spice-of-bharuch/1.jpg → "/projects/spice-of-bharuch/1.jpg"
+ *
+ * Other initiatives are removed for now — add them back one at a time.
  */
 export const projects: Project[] = [
   {
-    slug: "spice-of-bharuch",
-    title: "Spice of Bharuch (SOB)",
+    slug: "varsha-vandan",
+    title: "Varsha Vandan",
     avenue: "Community",
-    date: "Annual Signature Event",
+    date: "June 2026",
     summary:
-      "Our premier food festival and cultural fundraiser showcasing Bharuch's local culinary heritage. It attracts thousands of visitors and raises funds for local community development projects.",
-    impact: "Signature Project · 5,000+ Attendees",
-    isSignature: true,
-    // Drop photos in /public/projects/spice-of-bharuch/ then add paths below
+      "As the first monsoon rains arrived, club members stepped out after dark to greet Bharuch's underserved communities with roses and small care kits — a Rotaract tradition of welcoming the rains with warmth and gratitude toward the people who need it most.",
+    impact: "Roses and Care Kits Shared to Welcome the Monsoon",
     images: [
-      // "/projects/spice-of-bharuch/1.jpg",
+      "/projects/varsha-vandan/5.jpg",
+      "/projects/varsha-vandan/2.jpg",
+      "/projects/varsha-vandan/3.jpg",
+      "/projects/varsha-vandan/4.jpg",
+      "/projects/varsha-vandan/1.jpg",
     ],
+    video: "/projects/varsha-vandan/video.mp4",
   },
   {
-    slug: "local-for-vocal",
-    title: "Local For Vocal",
+    slug: "beyond-books",
+    title: "Beyond Books",
     avenue: "Community",
-    date: "Annual Signature Event",
+    date: "July 2026",
     summary:
-      "A marketplace initiative promoting local artisans, small-scale business owners, and cottage industries from Bharuch. We help them expand their reach and digitize their business.",
-    impact: "Signature Project · 50+ Local Vendors Supported",
-    isSignature: true,
-    // Drop photos in /public/projects/local-for-vocal/ then add paths below
+      "Club members visited a Anand Niketan school for a Beyond Books session, sitting down with students for an open conversation on real-world skills and ideas that go past the textbook — capped off with a warm thank-you from the school.",
+    impact: "An Interactive Session Taking Learning Beyond the Classroom",
     images: [
-      // "/projects/local-for-vocal/1.jpg",
+      "/projects/beyond-books/4.jpg",
+      "/projects/beyond-books/2.jpg",
+      "/projects/beyond-books/3.jpg",
+      "/projects/beyond-books/1.jpg",
+      "/projects/beyond-books/5.jpg",
+      "/projects/beyond-books/6.jpg",
+      "/projects/beyond-books/7.jpg",
     ],
   },
   {
-    slug: "community-blood-donation-drive",
-    title: "Community Blood Donation Drive",
+    slug: "go-green-tree-plantation",
+    title: "Go Green: Tree Plantation Drive",
     avenue: "Community",
-    date: "{{FILL: month/year}}",
+    date: "July 2026",
     summary:
-      "A single-day donation camp run with local hospitals to shore up the district blood bank ahead of peak demand.",
-    impact: "{{FILL: e.g. 120 units collected}}",
-    // Drop photos in /public/projects/community-blood-donation-drive/ then add paths below
+      "Club members rolled up their sleeves for a hands-on tree plantation drive, digging in saplings along community grounds to expand green cover and encourage a lasting habit of environmental stewardship in Bharuch.",
+    impact: "Saplings Planted for a Greener Bharuch",
     images: [
-      // "/projects/community-blood-donation-drive/1.jpg",
+      "/projects/go-green-tree-plantation/2.jpg",
+      "/projects/go-green-tree-plantation/1.jpg",
+      "/projects/go-green-tree-plantation/3.jpg",
+      "/projects/go-green-tree-plantation/4.jpg",
+      "/projects/go-green-tree-plantation/5.jpg",
     ],
   },
   {
-    slug: "skill-up-career-workshop",
-    title: "Skill-Up Career Workshop",
-    avenue: "Professional Development",
-    date: "{{FILL: month/year}}",
-    summary:
-      "Résumé, interview, and communication sessions for final-year students, led by working professionals from the club's network.",
-    impact: "{{FILL: e.g. 80 students trained}}",
-    // Drop photos in /public/projects/skill-up-career-workshop/ then add paths below
-    images: [
-      // "/projects/skill-up-career-workshop/1.jpg",
-    ],
-  },
-  {
-    slug: "charter-installation-ceremony",
-    title: "Charter & Installation Ceremony",
-    avenue: "Club Service",
-    date: "{{FILL: month/year}}",
-    summary:
-      "The annual installation marking the new Rotary year, welcoming incoming office bearers and members.",
-    impact: "{{FILL: e.g. new board installed}}",
-    // Drop photos in /public/projects/charter-installation-ceremony/ then add paths below
-    images: [
-      "/projects/charter-installation-ceremony/1.png",
-      "/projects/charter-installation-ceremony/2.png",
-    ],
-  },
-  {
-    slug: "clean-narmada-riverfront",
-    title: "Clean Narmada Riverfront",
+    slug: "blood-donation-drive",
+    title: "Blood Donation Drive",
     avenue: "Community",
-    date: "{{FILL: month/year}}",
+    date: "July 2026",
     summary:
-      "A morning cleanup along the Narmada riverfront, pairing waste collection with an awareness walk on plastic use.",
-    impact: "{{FILL: e.g. 300 kg waste removed}}",
-    // Drop photos in /public/projects/clean-narmada-riverfront/ then add paths below
+      "Club members organized a blood donation camp in partnership with Dr. Kiran C. Patel Medical College & Research Institute, welcoming donors to register, get screened, and give blood to help replenish the local blood bank.",
+    impact: "Blood Donated to Support Local Patients",
     images: [
-      // "/projects/clean-narmada-riverfront/1.jpg",
+      "/projects/blood-donation-drive/4.jpg",
+      "/projects/blood-donation-drive/2.jpg",
+      "/projects/blood-donation-drive/3.jpg",
+      "/projects/blood-donation-drive/1.jpg",
+      "/projects/blood-donation-drive/5.jpg",
     ],
   },
   {
-    slug: "international-fellowship-exchange",
-    title: "International Fellowship Exchange",
-    avenue: "International",
-    date: "{{FILL: month/year}}",
-    summary:
-      "A joint virtual meet with a partner Rotaract club abroad to share project ideas and build lasting friendships across borders.",
-    impact: "{{FILL: e.g. partner club paired}}",
-    // Drop photos in /public/projects/international-fellowship-exchange/ then add paths below
-    images: [
-      // "/projects/international-fellowship-exchange/1.jpg",
-    ],
-  },
-  {
-    slug: "winter-warmth-distribution",
-    title: "Winter Warmth Distribution",
+    slug: "healthy-habits-happy-hearts",
+    title: "Healthy Habits, Happy Hearts",
     avenue: "Community",
-    date: "{{FILL: month/year}}",
+    date: "June 2026",
     summary:
-      "Blankets and warm clothing distributed to families and street communities across Bharuch during the cold season.",
-    impact: "{{FILL: e.g. 250 blankets given}}",
-    // Drop photos in /public/projects/winter-warmth-distribution/ then add paths below
+      "Club members visited the Children's Home for Girls at Nandelav to lead a healthy habits awareness session, talking with residents about hygiene, nutrition, and simple daily routines that support long-term wellbeing.",
+    impact: "Healthy Habits Shared with Children's Home Residents",
     images: [
-      // "/projects/winter-warmth-distribution/1.jpg",
+      "/projects/healthy-habits-happy-hearts/1.jpg",
+      "/projects/healthy-habits-happy-hearts/2.jpg",
+      "/projects/healthy-habits-happy-hearts/3.jpg",
+      "/projects/healthy-habits-happy-hearts/4.jpg",
+      "/projects/healthy-habits-happy-hearts/5.jpg",
+      "/projects/healthy-habits-happy-hearts/6.jpg",
+      "/projects/healthy-habits-happy-hearts/7.jpg",
     ],
   },
 ];

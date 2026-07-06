@@ -14,11 +14,10 @@ export const club = {
   charterDate: "March 19, 1984",
   rotaryYear: "2026–27",
 
+
   // Weekly / regular meeting
   meeting: {
-    day: "{{FILL: meeting day, e.g. Every Sunday}}",
-    time: "{{FILL: meeting time, e.g. 7:00 PM}}",
-    venue: "{{FILL: venue name, Bharuch}}",
+    
   },
 
   email: "{{FILL: club email}}",

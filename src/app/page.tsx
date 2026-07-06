@@ -1,10 +1,8 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
-import { Impact } from "@/components/sections/Impact";
 import { Projects } from "@/components/sections/Projects";
 import { Team } from "@/components/sections/Team";
-import { Events } from "@/components/sections/Events";
 import { Sponsors } from "@/components/sections/Sponsors";
 import { Join } from "@/components/sections/Join";
 import { Footer } from "@/components/sections/Footer";
@@ -24,9 +22,7 @@ export default function Home() {
         <Intro />
         <Projects />
         <About />
-        <Impact />
         <Team />
-        <Events />
         <Sponsors />
         <ImageTextShowcase />
         <Join />

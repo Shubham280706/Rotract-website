@@ -4,9 +4,9 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/sections/Footer";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { Gear } from "@/components/Gear";
 import { ProjectGallery } from "@/components/ProjectGallery";
+import { FeaturedImageSlideshow } from "@/components/FeaturedImageSlideshow";
 
 interface Props {
   params: Promise<{
@@ -59,14 +59,7 @@ export default async function ProjectPage({ params }: Props) {
             {/* Left: Main Featured Image / Blueprint */}
             <div className="relative min-h-[320px] md:min-h-[460px] bg-royal-050 border-b md:border-b-0 md:border-r border-neutral">
               {hasImage ? (
-                <Image
-                  src={project.images[0]}
-                  alt={project.title}
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+                <FeaturedImageSlideshow images={project.images} alt={project.title} />
               ) : (
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
                   <div className="blueprint absolute inset-0 opacity-70" aria-hidden />
@@ -133,6 +126,26 @@ export default async function ProjectPage({ params }: Props) {
               {/* Horizontal scrollable track of photos */}
               <div className="mt-8">
                 <ProjectGallery images={project.images} avenue={project.avenue} />
+              </div>
+            </div>
+          )}
+
+          {/* Project video */}
+          {project.video && (
+            <div className={project.images && project.images.length > 0 ? "mt-16" : "mt-16 border-t border-neutral pt-16"}>
+              <div className="flex items-center gap-3">
+                <span className="h-2 w-2 rotate-45 bg-gold" aria-hidden />
+                <span className="mono-label text-royal">Event Video</span>
+              </div>
+              <h2 className="display mt-4 text-3xl text-ink">Watch the highlights</h2>
+
+              <div className="mt-8 border border-neutral bg-ink shadow-sm">
+                <video
+                  src={project.video}
+                  controls
+                  playsInline
+                  className="w-full max-h-[70vh]"
+                />
               </div>
             </div>
           )}

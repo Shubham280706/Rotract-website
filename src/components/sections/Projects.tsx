@@ -1,28 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ImageSlot } from "@/components/ImageSlot";
-import { avenues, projects, type Avenue, type Project } from "@/content/projects";
+import { projects, type Project } from "@/content/projects";
 import { ArrowRight, Sparkles } from "lucide-react";
 
-type Filter = "All" | Avenue;
-const filters: Filter[] = ["All", ...avenues];
-
 export function Projects() {
-  const [active, setActive] = useState<Filter>("All");
-
   // Separate signature projects from regular projects
   const signatureProjects = projects.filter((p) => p.isSignature);
   const regularProjects = projects.filter((p) => !p.isSignature);
-
-  // Filter regular projects based on active avenue tab
-  const shownRegular =
-    active === "All"
-      ? regularProjects
-      : regularProjects.filter((p) => p.avenue === active);
 
   return (
     <section id="projects" className="relative border-t border-neutral py-24 md:py-32">
@@ -51,7 +39,7 @@ export function Projects() {
         <div>
           <div className="max-w-2xl">
             <span className="mono-label text-azure text-xs tracking-widest">Avenues of Service</span>
-            <h3 className="display mt-2 text-3xl md:text-4xl text-ink leading-tight">
+            <h3 className="display mt-2 text-[clamp(2.6rem,6vw,4.4rem)] text-ink leading-tight">
               {signatureProjects.length > 0 ? "Other Initiatives" : "Our Initiatives"}
             </h3>
             <p className="mt-3 text-base text-ink/65">
@@ -59,34 +47,13 @@ export function Projects() {
             </p>
           </div>
 
-          {/* Filters */}
-          <div className="no-scrollbar mt-8 flex gap-2 overflow-x-auto pb-1">
-            {filters.map((f) => {
-              const on = active === f;
-              return (
-                <button
-                  key={f}
-                  onClick={() => setActive(f)}
-                  aria-pressed={on}
-                  className={`mono-label shrink-0 rounded-[2px] border px-4 py-2.5 transition-colors duration-200 ${
-                    on
-                      ? "border-royal bg-royal text-paper"
-                      : "border-neutral bg-paper text-ink/70 hover:border-royal hover:text-royal"
-                  }`}
-                >
-                  {f}
-                </button>
-              );
-            })}
-          </div>
-
           {/* Regular Projects Grid */}
           <motion.ul
             layout
-            className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-8 grid gap-8 sm:grid-cols-2"
           >
             <AnimatePresence mode="popLayout">
-              {shownRegular.map((p) => (
+              {regularProjects.map((p) => (
                 <Link
                   href={`/projects/${p.slug}`}
                   key={p.title}
@@ -103,10 +70,10 @@ export function Projects() {
                     <ImageSlot
                       src={p.images[0]}
                       label={p.avenue}
-                      aspect="3/2"
+                      aspect="16/9"
                       alt={p.title}
                     />
-                    <div className="flex flex-1 flex-col p-5">
+                    <div className="flex flex-1 flex-col p-6">
                       <div className="flex items-center justify-between gap-3">
                         <span className="mono-label text-azure text-xs">
                           {p.avenue}
@@ -115,10 +82,10 @@ export function Projects() {
                           {p.date}
                         </span>
                       </div>
-                      <h4 className="display mt-3 text-xl leading-tight text-ink group-hover:text-azure transition-colors duration-300">
+                      <h4 className="display mt-3 text-2xl leading-tight text-ink group-hover:text-azure transition-colors duration-300">
                         {p.title}
                       </h4>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-ink/70">
+                      <p className="mt-2 flex-1 text-base leading-relaxed text-ink/70">
                         {p.summary}
                       </p>
                       {p.impact && (

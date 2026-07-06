@@ -15,7 +15,7 @@ export const parentClub: Sponsor = {
   name: "Rotary Club of Bharuch",
   kind: "parent",
   url: "{{FILL: Rotary Club of Bharuch website/social}}",
-  logo: null,
+  logo: "/sponsors/rotary-gear.png",
   blurb:
     "Our sponsor club. Rotaract Club of Bharuch was chartered and is mentored by the Rotary Club of Bharuch, part of the worldwide Rotary movement.",
 };

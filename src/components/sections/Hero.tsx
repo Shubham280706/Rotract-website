@@ -1,10 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { Gear } from "@/components/Gear";
 import { club } from "@/content/club";
 import { Magnetic } from "@/components/Magnetic";
-import { motion } from "framer-motion";
 
 export function Hero() {
   return (
@@ -12,43 +11,37 @@ export function Hero() {
       {/* Ambient blueprint field */}
       <div className="blueprint absolute inset-0" aria-hidden />
 
-      {/* Signature: large ambient gear, quietly rotating behind the type */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-        className="pointer-events-none absolute -right-[22%] top-[8%] w-[70vw] max-w-[820px] text-royal/[0.07] sm:-right-[10%]"
-        style={{ ["--gear-bg" as string]: "transparent" }}
+      {/* Signature: Bharuch landmark illustration, faded into the paper backdrop */}
+      <div
+        className="pointer-events-none absolute -right-[6%] top-0 h-full w-[68vw] max-w-[880px] sm:-right-[2%]"
+        style={{
+          maskImage:
+            "radial-gradient(ellipse 62% 60% at 58% 46%, black 30%, transparent 76%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 62% 60% at 58% 46%, black 30%, transparent 76%)",
+        }}
         aria-hidden
       >
-        <Gear className="w-full" />
-      </motion.div>
-      <motion.div
-        animate={{ rotate: -360 }}
-        transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-        className="pointer-events-none absolute -left-[18%] bottom-[-14%] w-[46vw] max-w-[520px] text-gold/[0.10]"
-        style={{ ["--gear-bg" as string]: "transparent" }}
-        aria-hidden
-      >
-        <Gear className="w-full" teeth={20} />
-      </motion.div>
+        <Image
+          src="/bharuch-illustration.png"
+          alt=""
+          fill
+          priority
+          className="object-contain object-center opacity-80 sepia-[0.15] saturate-[0.85]"
+        />
+      </div>
 
       <div className="shell relative flex min-h-[100svh] flex-col justify-center pt-28 pb-20">
-        <p className="mono-label max-w-2xl text-royal">
-          Sponsored by {club.sponsorClub} · RI District {club.riDistrict} · Rotary
-          Year {club.rotaryYear} · Club ID {club.clubId} · Chartered{" "}
-          {club.charterDate}
-        </p>
-
-        <h1 className="display mt-6 max-w-4xl text-[clamp(2.9rem,9vw,6.6rem)] text-ink">
+        <h1 className="display max-w-4xl text-[clamp(2.9rem,9vw,6.6rem)] text-ink">
           Rotaract Club
           <br />
           of <span className="text-royal">Bharuch</span>
         </h1>
 
         <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink/75 sm:text-xl">
-          <span className="font-semibold text-ink">Fellowship Through Service.</span>{" "}
-          A youth service club for people aged 18–30 — turning friendship into
-          action across Bharuch, Gujarat.
+          Sponsored by {club.sponsorClub} · RI District {club.riDistrict} · Rotary
+          Year {club.rotaryYear} · Club ID {club.clubId} · Chartered{" "}
+          {club.charterDate}
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">

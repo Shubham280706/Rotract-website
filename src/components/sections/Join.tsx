@@ -32,23 +32,7 @@ export function Join() {
             fill out our membership form online.
           </p>
 
-          <dl className="mt-10 space-y-4">
-            <div className="flex items-center gap-3">
-              <CalendarDays className="h-5 w-5 text-gold" />
-              <dt className="sr-only">Meeting day</dt>
-              <dd className="text-paper/85">{club.meeting.day}</dd>
-            </div>
-            <div className="flex items-center gap-3">
-              <Clock className="h-5 w-5 text-gold" />
-              <dt className="sr-only">Meeting time</dt>
-              <dd className="text-paper/85">{club.meeting.time}</dd>
-            </div>
-            <div className="flex items-center gap-3">
-              <MapPin className="h-5 w-5 text-gold" />
-              <dt className="sr-only">Venue</dt>
-              <dd className="text-paper/85">{club.meeting.venue}</dd>
-            </div>
-          </dl>
+
         </div>
 
         {/* Right: call-to-action to Google Form */}

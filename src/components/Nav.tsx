@@ -7,10 +7,8 @@ import { Magnetic } from "./Magnetic";
 
 const links = [
   { href: "#about", label: "About" },
-  { href: "#impact", label: "Impact" },
   { href: "#projects", label: "Projects" },
   { href: "#team", label: "Team" },
-  { href: "#events", label: "Events" },
   { href: "#join", label: "Join" },
 ];
 
@@ -39,7 +37,7 @@ export function Nav() {
           <img 
             src="/logo.png" 
             alt="Rotaract Bharuch Logo" 
-            className="h-[240px] md:h-[320px] -my-[90px] md:-my-[120px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-[240px] md:h-[320px] -my-[90px] md:-my-[120px] w-auto object-contain pointer-events-none transition-transform duration-300 group-hover:scale-105"
             onError={(e) => {
               // Fallback text if the image is missing from the public folder
               e.currentTarget.style.display = 'none';
