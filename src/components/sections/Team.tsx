@@ -2,15 +2,16 @@
 
 import { Instagram } from "@/components/Icons";
 import { Reveal } from "@/components/Reveal";
+import { RevealGroup } from "@/components/RevealGroup";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ImageSlot } from "@/components/ImageSlot";
 import { team, type TeamMember } from "@/content/team";
 import { club } from "@/content/club";
 import { Magnetic } from "@/components/Magnetic";
 
-function MemberCard({ m, index, isLarge = false }: { m: TeamMember; index: number; isLarge?: boolean }) {
+function MemberCard({ m, isLarge = false }: { m: TeamMember; isLarge?: boolean }) {
   return (
-    <Reveal index={index} as="li" className="group">
+    <Reveal inherit as="li" className="group">
       <ImageSlot src={m.photo} label={m.role} aspect="4/5" alt={m.name} />
       <div className="mt-3">
         <div className="flex items-start justify-between gap-2">
@@ -71,11 +72,11 @@ export function Team() {
         {topLeadership.length > 0 && (
           <div className="mt-12 border-b border-neutral/50 pb-16">
             <p className="mono-label text-ink/50 text-center mb-8">Core Leadership</p>
-            <ul className="grid grid-cols-1 gap-12 md:gap-16 sm:grid-cols-3 max-w-6xl mx-auto px-4">
-              {topLeadership.map((m, i) => (
-                <MemberCard key={`${m.role}-${m.name}`} m={m} index={i} isLarge={true} />
+            <RevealGroup as="ul" className="grid grid-cols-1 gap-12 md:gap-16 sm:grid-cols-3 max-w-6xl mx-auto px-4">
+              {topLeadership.map((m) => (
+                <MemberCard key={`${m.role}-${m.name}`} m={m} isLarge={true} />
               ))}
-            </ul>
+            </RevealGroup>
           </div>
         )}
 
@@ -83,11 +84,11 @@ export function Team() {
         {restOfBoard.length > 0 && (
           <div className="mt-16">
             <p className="mono-label text-ink/50">Board Directors & Officers</p>
-            <ul className="mt-5 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-              {restOfBoard.map((m, i) => (
-                <MemberCard key={`${m.role}-${m.name}`} m={m} index={i} />
+            <RevealGroup as="ul" className="mt-5 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+              {restOfBoard.map((m) => (
+                <MemberCard key={`${m.role}-${m.name}`} m={m} />
               ))}
-            </ul>
+            </RevealGroup>
           </div>
         )}
 
@@ -95,11 +96,11 @@ export function Team() {
         {members.length > 0 && (
           <div className="mt-16">
             <p className="mono-label text-ink/50">Members</p>
-            <ul className="mt-5 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+            <RevealGroup as="ul" className="mt-5 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
               {members.map((m, i) => (
-                <MemberCard key={`${m.role}-${m.name}-${i}`} m={m} index={i} />
+                <MemberCard key={`${m.role}-${m.name}-${i}`} m={m} />
               ))}
-            </ul>
+            </RevealGroup>
           </div>
         )}
       </div>

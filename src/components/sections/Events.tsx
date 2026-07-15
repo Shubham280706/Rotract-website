@@ -7,6 +7,8 @@ import Image from "next/image";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ImageSlot } from "@/components/ImageSlot";
 import { Reveal } from "@/components/Reveal";
+import { RevealGroup } from "@/components/RevealGroup";
+import { TiltCard } from "@/components/TiltCard";
 import { past, upcoming, gallery } from "@/content/events";
 
 function hasUpcoming() {
@@ -57,31 +59,33 @@ export function Events() {
         )}
 
         {/* Past events */}
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {past.map((e, i) => (
-            <Reveal key={e.title} index={i} className="group border border-neutral bg-paper hover:border-azure/40 hover:-translate-y-1.5 hover:shadow-[0_12px_36px_rgba(10,22,40,0.06)] transition-all duration-300 ease-out">
-              <ImageSlot src={e.images[0]} label={e.title} aspect="16/9" alt={e.title} />
-              <div className="p-5">
-                <h3 className="display text-lg text-ink">{e.title}</h3>
-                {e.blurb && (
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink/70">
-                    {e.blurb}
-                  </p>
-                )}
-                <div className="mono-label mt-4 flex flex-wrap gap-x-4 gap-y-1 text-ink/50">
-                  <span className="inline-flex items-center gap-1.5">
-                    <CalendarDays className="h-3.5 w-3.5" /> {e.date}
-                  </span>
-                  {e.location && (
-                    <span className="inline-flex items-center gap-1.5">
-                      <MapPin className="h-3.5 w-3.5" /> {e.location}
-                    </span>
+        <RevealGroup as="div" className="mt-12 grid gap-6 md:grid-cols-3">
+          {past.map((e) => (
+            <Reveal key={e.title} inherit>
+              <TiltCard className="group border border-neutral bg-paper hover:border-azure/40 hover:-translate-y-1.5 hover:shadow-[0_12px_36px_rgba(10,22,40,0.06)] transition-all duration-300 ease-out">
+                <ImageSlot src={e.images[0]} label={e.title} aspect="16/9" alt={e.title} />
+                <div className="p-5">
+                  <h3 className="display text-lg text-ink">{e.title}</h3>
+                  {e.blurb && (
+                    <p className="mt-1.5 text-sm leading-relaxed text-ink/70">
+                      {e.blurb}
+                    </p>
                   )}
+                  <div className="mono-label mt-4 flex flex-wrap gap-x-4 gap-y-1 text-ink/50">
+                    <span className="inline-flex items-center gap-1.5">
+                      <CalendarDays className="h-3.5 w-3.5" /> {e.date}
+                    </span>
+                    {e.location && (
+                      <span className="inline-flex items-center gap-1.5">
+                        <MapPin className="h-3.5 w-3.5" /> {e.location}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </TiltCard>
             </Reveal>
           ))}
-        </div>
+        </RevealGroup>
 
         {/* Gallery */}
         <div className="mt-16">

@@ -3,6 +3,7 @@
 import { ArrowRight, CalendarDays, Clock, MapPin, ExternalLink } from "lucide-react";
 import { club } from "@/content/club";
 import { Magnetic } from "@/components/Magnetic";
+import { Reveal } from "@/components/Reveal";
 
 const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScdyBV2EqcsHkYlLOlOwfYR2KWfpKIBa55HtzIEPlZLkQj21g/viewform?fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacXMrhXijSbwLbI4RNaACF0QJnGVH2bw0ADAn22m3bXIkkV4YhAG_7UHxr0Rg_aem_SO--CmroTYft_2yJddrSwg";
 
@@ -16,7 +17,7 @@ export function Join() {
       <div className="shell relative grid gap-14 py-24 md:py-32 lg:grid-cols-2 lg:gap-20">
         
         {/* Left: pitch + meeting details */}
-        <div>
+        <Reveal as="div">
           <div className="flex items-center gap-3">
             <span className="h-2 w-2 rotate-45 bg-gold" aria-hidden />
             <span className="mono-label text-gold">Get involved</span>
@@ -33,10 +34,10 @@ export function Join() {
           </p>
 
 
-        </div>
+        </Reveal>
 
         {/* Right: call-to-action to Google Form */}
-        <div className="flex flex-col justify-center border border-white/15 bg-white/[0.03] p-8 sm:p-10 rounded-[4px] relative z-10">
+        <Reveal as="div" index={1} className="flex flex-col justify-center border border-white/15 bg-white/[0.03] p-8 sm:p-10 rounded-[4px] relative z-10">
           <span className="mono-label text-gold text-xs tracking-wider">Membership</span>
           <h3 className="display mt-4 text-3xl md:text-4xl text-paper">Ready to Join?</h3>
           <p className="mt-4 text-base leading-relaxed text-paper/70">
@@ -60,7 +61,7 @@ export function Join() {
           <p className="mono-label text-[10px] text-paper/40 mt-6 tracking-wide">
             * Opens Google Forms in a secure new tab.
           </p>
-        </div>
+        </Reveal>
 
       </div>
     </section>

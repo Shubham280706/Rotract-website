@@ -22,10 +22,10 @@ export function ImageTextShowcase() {
         {/* Giant Image-Masked Typography */}
         <motion.div
           className="w-full flex flex-col items-center select-none"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
         >
           {/* ROTARACT Line */}
           <h2

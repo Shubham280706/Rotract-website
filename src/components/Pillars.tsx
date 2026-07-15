@@ -1,6 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+  type MotionValue,
+} from "framer-motion";
 import { Heart, Users, Globe } from "lucide-react";
 
 const pillars = [
@@ -49,15 +56,22 @@ const SIZE = 200;
 const CENTER = SIZE / 2;
 
 export function Pillars() {
+  const reduce = useReducedMotion();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: wrapperRef,
+    offset: ["start start", "end end"],
+  });
+
   return (
     <div className="mt-16">
       {/* Section sub-heading */}
       <motion.div
         className="text-center mb-16"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
       >
         <span className="mono-label text-azure text-sm tracking-widest">Our Foundation</span>
         <h3 className="display mt-3 text-4xl md:text-5xl text-ink leading-tight">Three Pillars of Rotaract</h3>
@@ -66,17 +80,164 @@ export function Pillars() {
         </p>
       </motion.div>
 
-      {/* Symmetrical 3-Column Grid */}
-      <div className="grid gap-12 md:grid-cols-3 max-w-5xl mx-auto">
-        {pillars.map((pillar, index) => (
-          <PillarRing key={pillar.id} pillar={pillar} index={index} />
-        ))}
-      </div>
+      {reduce ? (
+        // Reduced motion: skip the scroll-pin entirely, show a plain grid.
+        <div className="grid gap-12 md:grid-cols-3 max-w-5xl mx-auto">
+          {pillars.map((pillar, index) => (
+            <StaticPillarCard key={pillar.id} pillar={pillar} index={index} />
+          ))}
+        </div>
+      ) : (
+        <div ref={wrapperRef} className="relative" style={{ height: "250vh" }}>
+          <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
+            <div className="w-full max-w-2xl px-6">
+              {/* Step dots */}
+              <div className="mb-10 flex items-center justify-center gap-3">
+                {pillars.map((pillar, i) => (
+                  <StepDot key={pillar.id} pillar={pillar} index={i} total={pillars.length} progress={scrollYProgress} />
+                ))}
+              </div>
+
+              <div className="relative h-[440px] sm:h-[400px]">
+                {pillars.map((pillar, index) => (
+                  <PinnedPillarState
+                    key={pillar.id}
+                    pillar={pillar}
+                    index={index}
+                    total={pillars.length}
+                    progress={scrollYProgress}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-function PillarRing({
+/** Per-pillar 0→1 "how active is this state right now" value, derived from
+ * overall scroll progress through the pinned wrapper. Boundary pillars don't
+ * fade at the very start/end so the first and last states are fully visible
+ * the instant the section locks in or right before it releases. */
+function useActiveness(progress: MotionValue<number>, index: number, total: number) {
+  const seg = 1 / total;
+  const start = index * seg;
+  const end = (index + 1) * seg;
+  const fade = seg * 0.3;
+
+  let inputRange: number[];
+  let outputRange: number[];
+
+  if (total === 1) {
+    inputRange = [0, 1];
+    outputRange = [1, 1];
+  } else if (index === 0) {
+    inputRange = [0, end - fade, end];
+    outputRange = [1, 1, 0];
+  } else if (index === total - 1) {
+    inputRange = [start, start + fade, 1];
+    outputRange = [0, 1, 1];
+  } else {
+    inputRange = [start, start + fade, end - fade, end];
+    outputRange = [0, 1, 1, 0];
+  }
+
+  return useTransform(progress, inputRange, outputRange);
+}
+
+function StepDot({
+  pillar,
+  index,
+  total,
+  progress,
+}: {
+  pillar: (typeof pillars)[number];
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const activeness = useActiveness(progress, index, total);
+  const scale = useTransform(activeness, [0, 1], [1, 1.4]);
+
+  return (
+    <motion.span
+      className="h-2 w-2 rounded-full"
+      style={{ backgroundColor: pillar.ringColor, opacity: useTransform(activeness, [0, 1], [0.25, 1]), scale }}
+    />
+  );
+}
+
+function PinnedPillarState({
+  pillar,
+  index,
+  total,
+  progress,
+}: {
+  pillar: (typeof pillars)[number];
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const Icon = pillar.icon;
+  const activeness = useActiveness(progress, index, total);
+  const opacity = activeness;
+  const y = useTransform(activeness, [0, 1], [16, 0]);
+  const dashOffset = useTransform(activeness, [0, 1], [
+    CIRCUMFERENCE,
+    CIRCUMFERENCE - (CIRCUMFERENCE * pillar.percent) / 100,
+  ]);
+
+  return (
+    <motion.div
+      className="absolute inset-0 flex flex-col items-center text-center"
+      style={{ opacity, y, pointerEvents: "none" }}
+    >
+      <span className="mono-label text-ink/40 text-xs tracking-widest">
+        Step {pillar.number} / 0{total}
+      </span>
+
+      <div className="relative mt-4 h-[200px] w-[200px]">
+        <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} className="-rotate-90">
+          <circle cx={CENTER} cy={CENTER} r={RADIUS} fill="none" stroke={pillar.ringTrack} strokeWidth="6" />
+          <motion.circle
+            cx={CENTER}
+            cy={CENTER}
+            r={RADIUS}
+            fill="none"
+            stroke={pillar.ringColor}
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeDasharray={CIRCUMFERENCE}
+            style={{ strokeDashoffset: dashOffset }}
+          />
+        </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <div
+            className="flex items-center justify-center w-14 h-14 rounded-full mb-2"
+            style={{ background: pillar.ringTrack }}
+          >
+            <Icon className="w-6 h-6" style={{ color: pillar.ringColor }} />
+          </div>
+          <span className="mono-label text-[10px] tracking-widest font-bold" style={{ color: pillar.ringColor }}>
+            Pillar {pillar.number}
+          </span>
+        </div>
+      </div>
+
+      <div className="mt-6 px-2 max-w-md">
+        <h3 className="display text-2xl text-ink leading-tight font-bold">{pillar.label}</h3>
+        <p className="text-xs text-ink/40 mono-label tracking-wider mt-1 uppercase font-semibold">
+          {pillar.subtitle}
+        </p>
+        <p className="mt-4 text-base leading-relaxed text-ink/70">{pillar.description}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+function StaticPillarCard({
   pillar,
   index,
 }: {
@@ -88,32 +249,17 @@ function PillarRing({
 
   return (
     <motion.div
-      className="group flex flex-col items-center text-center h-full justify-between bg-paper p-6 rounded-xl border border-neutral/60 hover:border-royal/30 shadow-[0_4px_20px_rgba(10,22,40,0.02)] hover:shadow-[0_20px_40px_rgba(194,24,91,0.05)] transition-all duration-300"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.15 }}
+      className="group flex flex-col items-center text-center h-full justify-between bg-paper p-6 rounded-xl border border-neutral/60 shadow-[0_4px_20px_rgba(10,22,40,0.02)]"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: false, amount: 0.3 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <div className="flex flex-col items-center">
-        {/* Ring */}
-        <div className="relative w-[200px] h-[200px] cursor-pointer">
-          <svg
-            width={SIZE}
-            height={SIZE}
-            viewBox={`0 0 ${SIZE} ${SIZE}`}
-            className="transform -rotate-90"
-          >
-            {/* Track */}
+        <div className="relative w-[200px] h-[200px]">
+          <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} className="-rotate-90">
+            <circle cx={CENTER} cy={CENTER} r={RADIUS} fill="none" stroke={pillar.ringTrack} strokeWidth="6" />
             <circle
-              cx={CENTER}
-              cy={CENTER}
-              r={RADIUS}
-              fill="none"
-              stroke={pillar.ringTrack}
-              strokeWidth="6"
-            />
-            {/* Progress arc */}
-            <motion.circle
               cx={CENTER}
               cy={CENTER}
               r={RADIUS}
@@ -122,17 +268,12 @@ function PillarRing({
               strokeWidth="6"
               strokeLinecap="round"
               strokeDasharray={CIRCUMFERENCE}
-              initial={{ strokeDashoffset: CIRCUMFERENCE }}
-              whileInView={{ strokeDashoffset: dashOffset }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, delay: 0.3 + index * 0.15, ease: "easeOut" }}
+              strokeDashoffset={dashOffset}
             />
           </svg>
-
-          {/* Center content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div
-              className="flex items-center justify-center w-14 h-14 rounded-full mb-2 transition-transform duration-300 group-hover:scale-110"
+              className="flex items-center justify-center w-14 h-14 rounded-full mb-2"
               style={{ background: pillar.ringTrack }}
             >
               <Icon className="w-6 h-6" style={{ color: pillar.ringColor }} />
@@ -145,18 +286,12 @@ function PillarRing({
             </span>
           </div>
         </div>
-
-        {/* Label + description below the ring */}
         <div className="mt-6 px-2">
-          <h3 className="display text-2xl text-ink leading-tight font-bold">
-            {pillar.label}
-          </h3>
+          <h3 className="display text-2xl text-ink leading-tight font-bold">{pillar.label}</h3>
           <p className="text-xs text-ink/40 mono-label tracking-wider mt-1 uppercase font-semibold">
             {pillar.subtitle}
           </p>
-          <p className="mt-4 text-base leading-relaxed text-ink/70">
-            {pillar.description}
-          </p>
+          <p className="mt-4 text-base leading-relaxed text-ink/70">{pillar.description}</p>
         </div>
       </div>
     </motion.div>

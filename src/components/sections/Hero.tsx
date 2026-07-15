@@ -4,6 +4,8 @@ import Image from "next/image";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { club } from "@/content/club";
 import { Magnetic } from "@/components/Magnetic";
+import { Reveal } from "@/components/Reveal";
+import { WordReveal } from "@/components/WordReveal";
 
 export function Hero() {
   return (
@@ -33,18 +35,24 @@ export function Hero() {
 
       <div className="shell relative flex min-h-[100svh] flex-col justify-center pt-28 pb-20">
         <h1 className="display max-w-4xl text-[clamp(2.9rem,9vw,6.6rem)] text-ink">
-          Rotaract Club
+          <WordReveal words={["Rotaract", "Club"]} />
           <br />
-          of <span className="text-royal">Bharuch</span>
+          <WordReveal
+            words={["of", "Bharuch"]}
+            startIndex={2}
+            wordClassName={(w) => (w === "Bharuch" ? "text-royal" : undefined)}
+          />
         </h1>
 
-        <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink/75 sm:text-xl">
-          Sponsored by {club.sponsorClub} · RI District {club.riDistrict} · Rotary
-          Year {club.rotaryYear} · Club ID {club.clubId} · Chartered{" "}
-          {club.charterDate}
-        </p>
+        <Reveal as="div" index={1}>
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink/75 sm:text-xl">
+            Sponsored by {club.sponsorClub} · RI District {club.riDistrict} · Rotary
+            Year {club.rotaryYear} · Club ID {club.clubId} · Chartered{" "}
+            {club.charterDate}
+          </p>
+        </Reveal>
 
-        <div className="mt-10 flex flex-wrap items-center gap-4">
+        <Reveal as="div" index={2} className="mt-10 flex flex-wrap items-center gap-4">
           <Magnetic>
             <a href="#projects" className="btn btn-primary">
               See our work
@@ -62,7 +70,7 @@ export function Hero() {
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </Magnetic>
-        </div>
+        </Reveal>
 
         <div className="absolute bottom-8 left-0 right-0">
           <div className="shell flex items-center gap-3">

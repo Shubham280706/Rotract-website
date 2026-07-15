@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import { RevealGroup } from "./RevealGroup";
 
 /**
  * Shared section header: a mono eyebrow (encodes a real fact/label)
@@ -16,8 +17,8 @@ export function SectionHeader({
   dark?: boolean;
 }) {
   return (
-    <div className="max-w-3xl">
-      <Reveal>
+    <RevealGroup className="max-w-3xl">
+      <Reveal inherit>
         <div className="flex items-center gap-3">
           <span className="h-1.5 w-1.5 rotate-45 bg-gold" aria-hidden />
           <span className={`mono-label ${dark ? "text-gold-light" : "text-royal"}`}>
@@ -25,18 +26,18 @@ export function SectionHeader({
           </span>
         </div>
       </Reveal>
-      <Reveal index={1}>
+      <Reveal inherit>
         <h2 className={`display mt-4 text-[clamp(2.8rem,6vw,4.2rem)] leading-tight ${dark ? "text-white" : "text-ink"}`}>
           {title}
         </h2>
       </Reveal>
       {lede && (
-        <Reveal index={2}>
+        <Reveal inherit>
           <p className={`mt-5 text-lg leading-relaxed ${dark ? "text-white/70" : "text-ink/70"}`}>
             {lede}
           </p>
         </Reveal>
       )}
-    </div>
+    </RevealGroup>
   );
 }

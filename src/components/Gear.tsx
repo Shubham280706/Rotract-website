@@ -1,3 +1,15 @@
+"use client";
+
+import {
+  motion,
+  useMotionTemplate,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
+
 /**
  * The signature element: a faithful rendering of the official Rotary wheel.
  * The mark adopted in 1924 is a gearwheel with 24 cogs, 6 spokes, and a
@@ -5,7 +17,8 @@
  * "worker's wheel" rather than an idle cog. Rendered from geometry (not
  * clipart) so it scales cleanly. Rotation is applied by the caller via a
  * CSS class so it runs off the main thread and pauses under
- * prefers-reduced-motion.
+ * prefers-reduced-motion; a scale/glow pulse derived from scroll velocity
+ * is layered on top (disabled under reduced motion).
  */
 
 type GearProps = {
@@ -41,6 +54,18 @@ function buildTeeth(count: number, rOuter: number, rInner: number, toothWidthDeg
 
 export function Gear({ className, spinClass, teeth = 24, title }: GearProps) {
   const bg = "var(--gear-bg, #faf9f6)";
+  const reduce = useReducedMotion();
+
+  // Scroll-velocity pulse: derived from scroll delta (there's no live Lenis
+  // instance wired up — SmoothScroll is a no-op placeholder — so we read
+  // straight off window scroll position via Framer's own velocity hook).
+  const { scrollY } = useScroll();
+  const rawVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(rawVelocity, { stiffness: 220, damping: 40, mass: 0.4 });
+  const intensity = useTransform(smoothVelocity, (v) => Math.min(Math.abs(v) / 1400, 1));
+  const scale = useTransform(intensity, [0, 1], [1, 1.1]);
+  const glowBlur = useTransform(intensity, [0, 1], [0, 8]);
+  const glowFilter = useMotionTemplate`drop-shadow(0 0 ${glowBlur}px currentColor)`;
 
   // Official Rotary wheel proportions (viewBox 0 0 100 100, centre 50,50).
   const toothTip = 47; // outer edge of the cogs
@@ -62,6 +87,7 @@ export function Gear({ className, spinClass, teeth = 24, title }: GearProps) {
       fill="none"
     >
       {title ? <title>{title}</title> : null}
+      <motion.g style={reduce ? undefined : { scale, filter: glowFilter }}>
       <g className={spinClass}>
         {/* Cogs */}
         <path d={teethPath} fill="currentColor" />
@@ -93,6 +119,7 @@ export function Gear({ className, spinClass, teeth = 24, title }: GearProps) {
         {/* Keyway — the notch that makes it a "worker's wheel" */}
         <rect x="48.4" y={50 - hubOuter - 0.5} width="3.2" height={hubOuter - hubBore + 3} fill={bg} />
       </g>
+      </motion.g>
     </svg>
   );
 }

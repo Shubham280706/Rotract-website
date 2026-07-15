@@ -25,7 +25,7 @@ const pillars = [
 export function Intro() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
+  const isInView = useInView(cardRef, { once: false, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -101,7 +101,7 @@ export function Intro() {
         <motion.div
           ref={cardRef}
           initial={{ opacity: 0, y: 40, scale: 0.96 }}
-          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.96 }}
           transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
           className="relative max-w-4xl w-full"
         >
@@ -113,7 +113,7 @@ export function Intro() {
             {/* Eyebrow */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ delay: 0.3, duration: 0.5 }}
               className="relative z-10 flex items-center gap-2 mb-4"
             >
@@ -127,7 +127,7 @@ export function Intro() {
             {/* Quote Text */}
             <motion.blockquote
               initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
               className="relative z-10"
             >
@@ -145,7 +145,7 @@ export function Intro() {
             {/* Pillar Icons Row */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ delay: 0.9, duration: 0.6 }}
               className="relative z-10 flex items-center justify-center gap-1 sm:gap-6 md:gap-10 mt-6 pt-6 border-t border-white/[0.1]"
             >
@@ -153,7 +153,7 @@ export function Intro() {
                 <motion.div
                   key={p.label}
                   initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                   transition={{ delay: 1 + i * 0.1, duration: 0.4 }}
                   className="flex flex-col items-center gap-2 group"
                 >

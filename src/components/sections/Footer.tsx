@@ -5,6 +5,7 @@ import { Instagram, Facebook } from "@/components/Icons";
 import { Gear } from "@/components/Gear";
 import { club } from "@/content/club";
 import { Magnetic } from "@/components/Magnetic";
+import { Reveal } from "@/components/Reveal";
 
 function clean(v: string) {
   return v && !v.includes("{{") ? v : null;
@@ -23,7 +24,7 @@ export function Footer() {
     <footer className="border-t border-neutral bg-paper">
       {/* Map + contact */}
       <div className="shell grid gap-10 py-16 lg:grid-cols-[1fr_1fr]">
-        <div>
+        <Reveal as="div">
           <div className="flex items-center gap-2.5">
             <Gear className="h-8 w-8 text-royal" spinClass="gear-spin" />
             <span className="display text-xl text-ink">{club.name}</span>
@@ -93,10 +94,10 @@ export function Footer() {
               </a>
             </Magnetic>
           </div>
-        </div>
+        </Reveal>
 
         {/* Map */}
-        <div className="min-h-[260px] overflow-hidden border border-neutral">
+        <Reveal as="div" index={1} className="min-h-[260px] overflow-hidden border border-neutral">
           <iframe
             title={`Map of ${club.location.city}`}
             src={mapSrc}
@@ -104,7 +105,7 @@ export function Footer() {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
-        </div>
+        </Reveal>
       </div>
 
       {/* Bottom bar */}
