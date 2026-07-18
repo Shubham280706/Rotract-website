@@ -134,17 +134,17 @@ function useActiveness(progress: MotionValue<number>, index: number, total: numb
     inputRange = [0, 1];
     outputRange = [1, 1];
   } else if (index === 0) {
-    inputRange = [0, end - fade, end];
-    outputRange = [1, 1, 0];
+    inputRange = [0, end - fade, end, 1];
+    outputRange = [1, 1, 0, 0];
   } else if (index === total - 1) {
-    inputRange = [start, start + fade, 1];
-    outputRange = [0, 1, 1];
+    inputRange = [0, start, start + fade, 1];
+    outputRange = [0, 0, 1, 1];
   } else {
-    inputRange = [start, start + fade, end - fade, end];
-    outputRange = [0, 1, 1, 0];
+    inputRange = [0, start, start + fade, end - fade, end, 1];
+    outputRange = [0, 0, 1, 1, 0, 0];
   }
 
-  return useTransform(progress, inputRange, outputRange);
+  return useTransform(progress, inputRange, outputRange, { clamp: true });
 }
 
 function StepDot({
@@ -184,6 +184,7 @@ function PinnedPillarState({
   const activeness = useActiveness(progress, index, total);
   const opacity = activeness;
   const y = useTransform(activeness, [0, 1], [16, 0]);
+  const visibility = useTransform(activeness, (v) => (v > 0 ? "visible" : "hidden"));
   const dashOffset = useTransform(activeness, [0, 1], [
     CIRCUMFERENCE,
     CIRCUMFERENCE - (CIRCUMFERENCE * pillar.percent) / 100,
@@ -192,7 +193,7 @@ function PinnedPillarState({
   return (
     <motion.div
       className="absolute inset-0 flex flex-col items-center text-center"
-      style={{ opacity, y, pointerEvents: "none" }}
+      style={{ opacity, y, visibility, pointerEvents: "none" }}
     >
       <span className="mono-label text-ink/40 text-xs tracking-widest">
         Step {pillar.number} / 0{total}

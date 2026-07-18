@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -11,6 +12,8 @@ import { projects, type Project } from "@/content/projects";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export function Projects() {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
   // Separate signature projects from regular projects
   const signatureProjects = projects.filter((p) => p.isSignature);
   const regularProjects = projects.filter((p) => !p.isSignature);
@@ -60,11 +63,13 @@ export function Projects() {
             className="mt-8 grid gap-8 sm:grid-cols-2"
           >
             <AnimatePresence mode="popLayout">
-              {regularProjects.map((p) => (
+              {regularProjects.map((p, index) => (
                 <Link
                   href={`/projects/${p.slug}`}
                   key={p.title}
-                  className="flex flex-col h-full focus:outline-none"
+                  className={`flex flex-col h-full focus:outline-none ${
+                    index >= 3 && !isExpanded ? "hidden sm:flex" : "flex"
+                  }`}
                 >
                   <TiltCard className="flex h-full flex-col">
                     <motion.li
@@ -108,6 +113,18 @@ export function Projects() {
               ))}
             </AnimatePresence>
           </motion.ul>
+
+          {/* Show More / Show Less Button for Mobile Viewports */}
+          {regularProjects.length > 3 && (
+            <div className="mt-10 flex justify-center sm:hidden">
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="btn btn-secondary w-full max-w-[240px] justify-center text-xs tracking-widest uppercase font-bold py-3.5 px-6 hover:shadow-sm"
+              >
+                {isExpanded ? "Show Less" : "Show More"}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
