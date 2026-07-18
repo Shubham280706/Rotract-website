@@ -112,27 +112,35 @@ export function Intro() {
               Sponsored by {club.sponsorClub} (RI District {club.riDistrict}), we bring together passionate individuals to lead, learn, and serve. Through impactful community development projects, youth empowerment drives, and professional workshops, we strive to build stronger fellowship and leave a lasting mark on Bharuch and beyond.
             </p>
 
-            {/* MOBILE ONLY: Swipeable Horizontal Photo Carousel */}
-            <div className="lg:hidden w-full overflow-hidden py-2">
-              <div className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory px-1 pb-2">
-                {stackImages.map((img, i) => (
-                  <div
-                    key={i}
-                    className="w-[280px] sm:w-[320px] aspect-[4/3] shrink-0 snap-start rounded-xl overflow-hidden border border-neutral/60 shadow-[0_4px_16px_rgba(26,26,46,0.04)] bg-white p-1"
-                  >
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      className="w-full h-full object-cover rounded-lg pointer-events-none select-none"
-                      draggable="false"
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
+            {/* MOBILE ONLY: Asymmetrical Editorial Photo Grid Collage */}
+            <div className="lg:hidden w-full space-y-3 py-2">
+              {/* Primary Image: 16/9 Aspect Ratio */}
+              <div className="w-full aspect-[16/9] rounded-xl overflow-hidden border border-neutral/60 shadow-sm bg-white p-1">
+                <img
+                  src={stackImages[0].src}
+                  alt={stackImages[0].alt}
+                  className="w-full h-full object-cover rounded-lg"
+                  loading="lazy"
+                />
               </div>
-              <div className="flex justify-start gap-1.5 mt-2 px-1 opacity-60">
-                <span className="h-1 w-8 rounded-full bg-royal" />
-                <span className="mono-label text-[9px] tracking-wider text-ink/40">Swipe to view</span>
+              {/* Secondary & Tertiary Images: 4/3 Aspect Ratio Side-by-Side */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="w-full aspect-[4/3] rounded-xl overflow-hidden border border-neutral/60 shadow-sm bg-white p-1">
+                  <img
+                    src={stackImages[1].src}
+                    alt={stackImages[1].alt}
+                    className="w-full h-full object-cover rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="w-full aspect-[4/3] rounded-xl overflow-hidden border border-neutral/60 shadow-sm bg-white p-1">
+                  <img
+                    src={stackImages[2].src}
+                    alt={stackImages[2].alt}
+                    className="w-full h-full object-cover rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
 
