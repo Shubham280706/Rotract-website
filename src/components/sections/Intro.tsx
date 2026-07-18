@@ -102,13 +102,13 @@ export function Intro() {
                 A Community <br />
                 <span className="text-royal">of Action.</span>
               </h2>
-              <p className="text-base sm:text-lg md:text-xl text-ink/80 leading-relaxed font-light">
+              <p className="text-lg sm:text-xl md:text-2xl text-ink/80 leading-relaxed font-light">
                 <span className="font-semibold text-royal">Rotaract Club of Bharuch</span> is a dynamic community of young leaders, changemakers, and volunteers committed to creating positive social impact.
               </p>
             </div>
 
             {/* Paragraph Description */}
-            <p className="text-sm sm:text-base text-ink/65 leading-relaxed font-light">
+            <p className="text-base sm:text-lg text-ink/75 leading-relaxed font-light">
               Sponsored by {club.sponsorClub} (RI District {club.riDistrict}), we bring together passionate individuals to lead, learn, and serve. Through impactful community development projects, youth empowerment drives, and professional workshops, we strive to build stronger fellowship and leave a lasting mark on Bharuch and beyond.
             </p>
 
@@ -123,7 +123,8 @@ export function Intro() {
                     <img
                       src={img.src}
                       alt={img.alt}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover rounded-lg pointer-events-none select-none"
+                      draggable="false"
                       loading="lazy"
                     />
                   </div>
@@ -148,14 +149,14 @@ export function Intro() {
                     whileHover={{ y: -4, scale: 1.01 }}
                     className={`group flex items-start gap-2.5 sm:gap-4 p-3 sm:p-4 rounded-xl border border-neutral/50 bg-white/70 backdrop-blur-sm shadow-[0_4px_16px_rgba(26,26,46,0.02)] transition-all duration-300 ${pillar.borderColorClass}`}
                   >
-                    <div className={`flex shrink-0 items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${pillar.bgColorClass} border border-neutral/30 group-hover:bg-royal group-hover:text-white transition-all duration-300`}>
-                      <Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${pillar.colorClass} group-hover:text-white transition-colors duration-300`} />
+                    <div className="flex shrink-0 items-center justify-center w-10 h-10 rounded-xl bg-royal/5 border border-neutral/30 group-hover:bg-royal group-hover:text-white transition-all duration-300">
+                      <Icon className={`h-5 w-5 ${pillar.colorClass} group-hover:text-white transition-colors duration-300`} />
                     </div>
                     <div className="space-y-0.5 sm:space-y-1 min-w-0">
-                      <h4 className="font-bold sm:font-semibold text-ink text-xs sm:text-base group-hover:text-royal transition-colors duration-300 truncate">
+                      <h4 className="font-bold sm:font-semibold text-ink text-sm sm:text-base group-hover:text-royal transition-colors duration-300 truncate">
                         {pillar.label}
                       </h4>
-                      <p className="text-[10px] sm:text-xs text-ink/65 leading-normal font-light">
+                      <p className="text-xs sm:text-sm text-ink/65 leading-normal font-light">
                         {pillar.description}
                       </p>
                     </div>
