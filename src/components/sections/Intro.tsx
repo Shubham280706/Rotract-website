@@ -69,7 +69,7 @@ export function Intro() {
   return (
     <section
       ref={containerRef}
-      className="relative bg-[#fbf8f9] py-20 md:py-28 overflow-hidden border-y border-neutral/60"
+      className="relative bg-[#fbf8f9] py-16 md:py-28 overflow-hidden border-y border-neutral/60"
     >
       {/* Subtle blueprint grid overlay for styling cohesion */}
       <div className="blueprint absolute inset-0 opacity-[0.03] pointer-events-none" aria-hidden="true" />
@@ -79,14 +79,14 @@ export function Intro() {
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-azure/5 blur-[140px] pointer-events-none" aria-hidden="true" />
 
       <div className="shell relative z-10">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 items-center">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16 items-center">
           
           {/* ─── LEFT COLUMN: CONTENT & PILLARS ─── */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 space-y-8"
+            className="lg:col-span-7 space-y-6 md:space-y-8"
           >
             {/* Tag / Eyebrow */}
             <div className="flex items-center gap-2">
@@ -97,23 +97,46 @@ export function Intro() {
             </div>
 
             {/* Heading */}
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               <h2 className="display text-4xl sm:text-5xl md:text-6xl text-ink leading-[1.05]">
                 A Community <br />
                 <span className="text-royal">of Action.</span>
               </h2>
-              <p className="text-lg md:text-xl text-ink/80 leading-relaxed font-light">
+              <p className="text-base sm:text-lg md:text-xl text-ink/80 leading-relaxed font-light">
                 <span className="font-semibold text-royal">Rotaract Club of Bharuch</span> is a dynamic community of young leaders, changemakers, and volunteers committed to creating positive social impact.
               </p>
             </div>
 
             {/* Paragraph Description */}
-            <p className="text-base text-ink/65 leading-relaxed font-light">
+            <p className="text-sm sm:text-base text-ink/65 leading-relaxed font-light">
               Sponsored by {club.sponsorClub} (RI District {club.riDistrict}), we bring together passionate individuals to lead, learn, and serve. Through impactful community development projects, youth empowerment drives, and professional workshops, we strive to build stronger fellowship and leave a lasting mark on Bharuch and beyond.
             </p>
 
-            {/* Pillars Grid */}
-            <div className="grid gap-4 sm:grid-cols-2 pt-4">
+            {/* MOBILE ONLY: Swipeable Horizontal Photo Carousel */}
+            <div className="lg:hidden w-full overflow-hidden py-2">
+              <div className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory px-1 pb-2">
+                {stackImages.map((img, i) => (
+                  <div
+                    key={i}
+                    className="w-[280px] sm:w-[320px] aspect-[4/3] shrink-0 snap-start rounded-xl overflow-hidden border border-neutral/60 shadow-[0_4px_16px_rgba(26,26,46,0.04)] bg-white p-1"
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="w-full h-full object-cover rounded-lg"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-start gap-1.5 mt-2 px-1 opacity-60">
+                <span className="h-1 w-8 rounded-full bg-royal" />
+                <span className="mono-label text-[9px] tracking-wider text-ink/40">Swipe to view</span>
+              </div>
+            </div>
+
+            {/* Pillars Grid (2x2 on all viewports for compactness on mobile) */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-2 md:pt-4">
               {pillars.map((pillar, index) => {
                 const Icon = pillar.icon;
                 return (
@@ -123,16 +146,16 @@ export function Intro() {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
                     whileHover={{ y: -4, scale: 1.01 }}
-                    className={`group flex items-start gap-4 p-4 rounded-xl border border-neutral/50 bg-white/70 backdrop-blur-sm shadow-[0_4px_16px_rgba(26,26,46,0.02)] transition-all duration-300 ${pillar.borderColorClass}`}
+                    className={`group flex items-start gap-2.5 sm:gap-4 p-3 sm:p-4 rounded-xl border border-neutral/50 bg-white/70 backdrop-blur-sm shadow-[0_4px_16px_rgba(26,26,46,0.02)] transition-all duration-300 ${pillar.borderColorClass}`}
                   >
-                    <div className={`flex shrink-0 items-center justify-center w-10 h-10 rounded-xl ${pillar.bgColorClass} border border-neutral/30 group-hover:bg-royal group-hover:text-white transition-all duration-300`}>
-                      <Icon className={`h-5 w-5 ${pillar.colorClass} group-hover:text-white transition-colors duration-300`} />
+                    <div className={`flex shrink-0 items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${pillar.bgColorClass} border border-neutral/30 group-hover:bg-royal group-hover:text-white transition-all duration-300`}>
+                      <Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${pillar.colorClass} group-hover:text-white transition-colors duration-300`} />
                     </div>
-                    <div className="space-y-1">
-                      <h4 className="font-semibold text-ink text-sm sm:text-base group-hover:text-royal transition-colors duration-300">
+                    <div className="space-y-0.5 sm:space-y-1 min-w-0">
+                      <h4 className="font-bold sm:font-semibold text-ink text-xs sm:text-base group-hover:text-royal transition-colors duration-300 truncate">
                         {pillar.label}
                       </h4>
-                      <p className="text-xs text-ink/60 leading-normal font-light">
+                      <p className="text-[10px] sm:text-xs text-ink/65 leading-normal font-light">
                         {pillar.description}
                       </p>
                     </div>
@@ -142,18 +165,18 @@ export function Intro() {
             </div>
           </motion.div>
 
-          {/* ─── RIGHT COLUMN: STAGGERED PHOTO COLLAGE ─── */}
+          {/* ─── DESKTOP ONLY: STAGGERED PHOTO COLLAGE ─── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="lg:col-span-5 relative flex justify-center items-center h-[340px] sm:h-[450px] lg:h-[500px]"
+            className="hidden lg:flex lg:col-span-5 relative justify-center items-center lg:h-[500px]"
           >
             {/* Outer dotted accent circle framing the photos */}
             <div className="absolute w-[80%] aspect-square border border-dashed border-neutral/60 rounded-full scale-110 opacity-60 animate-gear-spin pointer-events-none" />
 
             {/* Photo stack wrapper */}
-            <div className="relative w-full max-w-[340px] sm:max-w-[420px] aspect-[4/3]">
+            <div className="relative w-full max-w-[420px] aspect-[4/3]">
               {stackImages.map((img, i) => {
                 const isHovered = hoveredIdx === i;
                 const defaultZIndex = i === 2 ? 20 : i === 0 ? 10 : 0;
