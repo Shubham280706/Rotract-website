@@ -13,9 +13,9 @@ function MemberCard({ m, isLarge = false }: { m: TeamMember; isLarge?: boolean }
   return (
     <Reveal inherit as="li" className="group">
       <ImageSlot src={m.photo} label={m.role} aspect="4/5" alt={m.name} />
-      <div className="mt-3">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className={`display leading-tight text-ink ${isLarge ? "text-xl md:text-2xl font-bold" : "text-lg"}`}>{m.name}</h3>
+      <div className="mt-2.5 sm:mt-3">
+        <div className="flex items-start justify-between gap-1 sm:gap-2">
+          <h3 className={`display leading-tight text-ink ${isLarge ? "text-sm sm:text-lg md:text-2xl font-bold" : "text-xs sm:text-base md:text-lg"}`}>{m.name}</h3>
           {m.instagram && (
             <Magnetic>
               <a
@@ -23,14 +23,14 @@ function MemberCard({ m, isLarge = false }: { m: TeamMember; isLarge?: boolean }
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${m.name} on Instagram`}
-                className="mt-0.5 text-ink/50 transition-colors hover:text-azure block"
+                className="mt-0.5 text-ink/50 transition-colors hover:text-azure block shrink-0"
               >
-                <Instagram className="h-4 w-4" />
+                <Instagram className="h-3 w-3 sm:h-4 sm:w-4" />
               </a>
             </Magnetic>
           )}
         </div>
-        <p className={`mono-label mt-1 text-azure ${isLarge ? "text-xs font-semibold" : "text-[10px]"}`}>{m.role}</p>
+        <p className={`mono-label mt-0.5 sm:mt-1 text-azure ${isLarge ? "text-[8px] sm:text-xs font-semibold" : "text-[8px] sm:text-[10px]"}`}>{m.role}</p>
       </div>
     </Reveal>
   );
@@ -72,7 +72,7 @@ export function Team() {
         {topLeadership.length > 0 && (
           <div className="mt-12 border-b border-neutral/50 pb-16">
             <p className="mono-label text-ink/50 text-center mb-8">Core Leadership</p>
-            <RevealGroup as="ul" className="grid grid-cols-1 gap-12 md:gap-16 sm:grid-cols-3 max-w-6xl mx-auto px-4">
+            <RevealGroup as="ul" className="grid grid-cols-3 gap-4 sm:gap-12 md:gap-16 max-w-6xl mx-auto px-1 sm:px-4">
               {topLeadership.map((m) => (
                 <MemberCard key={`${m.role}-${m.name}`} m={m} isLarge={true} />
               ))}
@@ -84,7 +84,7 @@ export function Team() {
         {restOfBoard.length > 0 && (
           <div className="mt-16">
             <p className="mono-label text-ink/50">Board Directors & Officers</p>
-            <RevealGroup as="ul" className="mt-5 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+            <RevealGroup as="ul" className="mt-5 grid grid-cols-3 gap-4 sm:gap-6 lg:grid-cols-4">
               {restOfBoard.map((m) => (
                 <MemberCard key={`${m.role}-${m.name}`} m={m} />
               ))}
@@ -96,7 +96,7 @@ export function Team() {
         {members.length > 0 && (
           <div className="mt-16">
             <p className="mono-label text-ink/50">Members</p>
-            <RevealGroup as="ul" className="mt-5 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+            <RevealGroup as="ul" className="mt-5 grid grid-cols-3 gap-4 sm:gap-6 lg:grid-cols-6">
               {members.map((m, i) => (
                 <MemberCard key={`${m.role}-${m.name}-${i}`} m={m} />
               ))}
