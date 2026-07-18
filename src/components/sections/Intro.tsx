@@ -42,7 +42,7 @@ const pillars = [
 
 const stackImages = [
   {
-    src: "/intro/charity.png",
+    src: "/intro/workshop.png",
     alt: "Charter installation ceremony",
     className: "absolute top-0 left-0 w-[68%] aspect-[4/3] rounded-xl shadow-md border-4 border-white z-10",
     rotate: -6,
@@ -54,7 +54,7 @@ const stackImages = [
     rotate: 8,
   },
   {
-    src: "/intro/workshop.png",
+    src: "/intro/charity.png",
     alt: "Professional development workshop",
     className: "absolute bottom-0 left-[12%] w-[72%] aspect-[4/3] rounded-xl shadow-lg border-4 border-white z-20",
     rotate: -2,
