@@ -1,178 +1,211 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { Heart, Users, Globe, Lightbulb } from "lucide-react";
-
-const collageImages = [
-  { src: "/intro/community.png", alt: "Community cleanup drive", row: 1 },
-  { src: "/intro/workshop.png", alt: "Professional development workshop", row: 1 },
-  { src: "/intro/team.png", alt: "Team volunteers", row: 1 },
-  { src: "/intro/charity.png", alt: "Charity distribution", row: 2 },
-  { src: "/intro/festival.png", alt: "Food festival event", row: 2 },
-  { src: "/intro/environment.png", alt: "Tree planting initiative", row: 2 },
-  { src: "/projects/charter-installation-ceremony/1.png", alt: "Charter ceremony", row: 3 },
-  { src: "/projects/charter-installation-ceremony/2.png", alt: "Installation ceremony", row: 3 },
-];
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Heart, Users, Globe, Lightbulb, Sparkles } from "lucide-react";
+import { club } from "@/content/club";
 
 const pillars = [
-  { icon: Heart, label: "Service", color: "text-royal" },
-  { icon: Users, label: "Leadership", color: "text-azure" },
-  { icon: Globe, label: "Community", color: "text-gold" },
-  { icon: Lightbulb, label: "Empowerment", color: "text-royal" },
+  {
+    icon: Heart,
+    label: "Service",
+    description: "Hands-on projects for blood drives, health camp distributions, and winter relief.",
+    colorClass: "text-royal",
+    bgColorClass: "bg-royal/5",
+    borderColorClass: "hover:border-royal/30",
+  },
+  {
+    icon: Users,
+    label: "Leadership",
+    description: "Run projects, hold executive positions, and develop teamwork & public speaking.",
+    colorClass: "text-azure",
+    bgColorClass: "bg-azure/5",
+    borderColorClass: "hover:border-azure/30",
+  },
+  {
+    icon: Globe,
+    label: "Community",
+    description: "Connect with a global fellowship and build local change networks.",
+    colorClass: "text-gold",
+    bgColorClass: "bg-gold/5",
+    borderColorClass: "hover:border-gold/30",
+  },
+  {
+    icon: Lightbulb,
+    label: "Empowerment",
+    description: "Empower youth through skill workshops, mentorship, and career readiness.",
+    colorClass: "text-royal",
+    bgColorClass: "bg-royal/5",
+    borderColorClass: "hover:border-royal/30",
+  },
+];
+
+const stackImages = [
+  {
+    src: "/projects/charter-installation-ceremony/1.png",
+    alt: "Charter installation ceremony",
+    className: "absolute top-0 left-0 w-[68%] aspect-[4/3] rounded-xl shadow-md border-4 border-white z-10",
+    rotate: -6,
+  },
+  {
+    src: "/intro/community.png",
+    alt: "Community cleanup drive",
+    className: "absolute top-6 right-0 w-[64%] aspect-[4/3] rounded-xl shadow-md border-4 border-white z-0",
+    rotate: 8,
+  },
+  {
+    src: "/intro/workshop.png",
+    alt: "Professional development workshop",
+    className: "absolute bottom-0 left-[12%] w-[72%] aspect-[4/3] rounded-xl shadow-lg border-4 border-white z-20",
+    rotate: -2,
+  },
 ];
 
 export function Intro() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: false, margin: "-100px" });
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Parallax: rows move at different speeds
-  const row1Y = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const row2Y = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const row3Y = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const rowTransforms = [row1Y, row2Y, row3Y];
-
-  const row1 = collageImages.filter((img) => img.row === 1);
-  const row2 = collageImages.filter((img) => img.row === 2);
-  const row3 = collageImages.filter((img) => img.row === 3);
-  const rows = [row1, row2, row3];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
     <section
-      ref={sectionRef}
-      className="relative overflow-hidden border-t border-neutral"
-      style={{ minHeight: "85vh" }}
+      ref={containerRef}
+      className="relative bg-[#fbf8f9] py-20 md:py-28 overflow-hidden border-y border-neutral/60"
     >
-      {/* ─── PHOTO COLLAGE WALL (Background) ─── */}
-      <div className="absolute inset-0 z-0">
-        {rows.map((row, rowIdx) => (
+      {/* Subtle blueprint grid overlay for styling cohesion */}
+      <div className="blueprint absolute inset-0 opacity-[0.03] pointer-events-none" aria-hidden="true" />
+
+      {/* Decorative ambient radial glow */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-royal/5 blur-[120px] pointer-events-none" aria-hidden="true" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-azure/5 blur-[140px] pointer-events-none" aria-hidden="true" />
+
+      <div className="shell relative z-10">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 items-center">
+          
+          {/* ─── LEFT COLUMN: CONTENT & PILLARS ─── */}
           <motion.div
-            key={rowIdx}
-            style={{ y: rowTransforms[rowIdx] }}
-            className="flex gap-2 md:gap-3 mb-2 md:mb-3"
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 space-y-8"
           >
-            {/* Duplicate images for seamless fill */}
-            {[...row, ...row, ...row].map((img, imgIdx) => (
-              <div
-                key={imgIdx}
-                className="shrink-0 overflow-hidden rounded-[4px]"
-                style={{
-                  width: rowIdx === 2 ? "50%" : "33.33%",
-                  aspectRatio: rowIdx === 2 ? "16/9" : "4/3",
-                }}
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </motion.div>
-        ))}
-
-        {/* Dark overlay gradient for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/70 to-ink/60" />
-
-        {/* Diagonal pattern overlay for texture */}
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: `repeating-linear-gradient(
-              45deg,
-              transparent,
-              transparent 10px,
-              rgba(255,255,255,0.1) 10px,
-              rgba(255,255,255,0.1) 11px
-            )`,
-          }}
-        />
-      </div>
-
-      {/* ─── FLOATING GLASSMORPHISM CARD (Foreground) ─── */}
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-16 md:py-20">
-        <motion.div
-          ref={cardRef}
-          initial={{ opacity: 0, y: 40, scale: 0.96 }}
-          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.96 }}
-          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-          className="relative max-w-4xl w-full"
-        >
-          {/* Glass Card */}
-          <div className="relative backdrop-blur-xl bg-white/[0.12] border border-white/[0.18] rounded-xl px-5 py-8 sm:p-10 md:p-12 lg:p-14 shadow-[0_32px_80px_rgba(0,0,0,0.35)]">
-            {/* Subtle inner glow */}
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.08] via-transparent to-royal/[0.06] pointer-events-none" />
-
-            {/* Eyebrow */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="relative z-10 flex items-center gap-2 mb-4"
-            >
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold-light/50 to-transparent" />
-              <span className="mono-label text-gold-light text-[10px] tracking-[0.2em] font-bold">
+            {/* Tag / Eyebrow */}
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-royal animate-pulse" />
+              <span className="mono-label text-royal font-bold text-xs tracking-[0.2em]">
                 Who We Are
               </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold-light/50 to-transparent" />
-            </motion.div>
+            </div>
 
-            {/* Quote Text */}
-            <motion.blockquote
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="relative z-10"
-            >
-              <p className="text-base md:text-lg lg:text-xl leading-relaxed text-white/90 font-light text-center">
-                <span className="text-gold-light font-semibold">Rotaract Club of Bharuch</span>{" "}
-                is a dynamic community of young leaders, changemakers, and volunteers committed to creating a positive impact through{" "}
-                <span className="text-gold-light font-medium">service, leadership, and fellowship</span>.{" "}
-                Guided by the values of Rotary Club of Bharuch, our club brings together passionate individuals who believe in making a meaningful difference in society through impactful community projects, professional development, environmental initiatives, and youth empowerment.{" "}
-                With every project, we strive to{" "}
-                <span className="text-gold-light font-medium">inspire action</span>,{" "}
-                build stronger communities, and create opportunities that leave a lasting impact on Bharuch and beyond.
+            {/* Heading */}
+            <div className="space-y-4">
+              <h2 className="display text-4xl sm:text-5xl md:text-6xl text-ink leading-[1.05]">
+                A Community <br />
+                <span className="text-royal">of Action.</span>
+              </h2>
+              <p className="text-lg md:text-xl text-ink/80 leading-relaxed font-light">
+                <span className="font-semibold text-royal">Rotaract Club of Bharuch</span> is a dynamic community of young leaders, changemakers, and volunteers committed to creating positive social impact.
               </p>
-            </motion.blockquote>
+            </div>
 
-            {/* Pillar Icons Row */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-              className="relative z-10 flex items-center justify-center gap-1 sm:gap-6 md:gap-10 mt-6 pt-6 border-t border-white/[0.1]"
-            >
-              {pillars.map((p, i) => (
-                <motion.div
-                  key={p.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                  transition={{ delay: 1 + i * 0.1, duration: 0.4 }}
-                  className="flex flex-col items-center gap-2 group"
-                >
-                  <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-white/[0.08] border border-white/[0.12] flex items-center justify-center group-hover:bg-white/[0.15] group-hover:border-gold-light/30 transition-all duration-300">
-                    <p.icon className="h-4 w-4 md:h-5 md:w-5 text-gold-light" />
-                  </div>
-                  <span className="mono-label text-[8px] md:text-[10px] text-white/50 tracking-normal md:tracking-widest font-bold">
-                    {p.label}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+            {/* Paragraph Description */}
+            <p className="text-base text-ink/65 leading-relaxed font-light">
+              Sponsored by {club.sponsorClub} (RI District {club.riDistrict}), we bring together passionate individuals to lead, learn, and serve. Through impactful community development projects, youth empowerment drives, and professional workshops, we strive to build stronger fellowship and leave a lasting mark on Bharuch and beyond.
+            </p>
 
-          {/* Decorative floating dots */}
-          <div className="absolute -top-4 -left-4 w-3 h-3 rounded-full bg-gold-light/40 animate-pulse" />
-          <div className="absolute -bottom-3 -right-3 w-2 h-2 rounded-full bg-azure/40 animate-pulse" style={{ animationDelay: "1s" }} />
-          <div className="absolute top-1/2 -right-6 w-1.5 h-1.5 rounded-full bg-gold-light/30 animate-pulse" style={{ animationDelay: "0.5s" }} />
-        </motion.div>
+            {/* Pillars Grid */}
+            <div className="grid gap-4 sm:grid-cols-2 pt-4">
+              {pillars.map((pillar, index) => {
+                const Icon = pillar.icon;
+                return (
+                  <motion.div
+                    key={pillar.label}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
+                    whileHover={{ y: -4, scale: 1.01 }}
+                    className={`group flex items-start gap-4 p-4 rounded-xl border border-neutral/50 bg-white/70 backdrop-blur-sm shadow-[0_4px_16px_rgba(26,26,46,0.02)] transition-all duration-300 ${pillar.borderColorClass}`}
+                  >
+                    <div className={`flex shrink-0 items-center justify-center w-10 h-10 rounded-xl ${pillar.bgColorClass} border border-neutral/30 group-hover:bg-royal group-hover:text-white transition-all duration-300`}>
+                      <Icon className={`h-5 w-5 ${pillar.colorClass} group-hover:text-white transition-colors duration-300`} />
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="font-semibold text-ink text-sm sm:text-base group-hover:text-royal transition-colors duration-300">
+                        {pillar.label}
+                      </h4>
+                      <p className="text-xs text-ink/60 leading-normal font-light">
+                        {pillar.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* ─── RIGHT COLUMN: STAGGERED PHOTO COLLAGE ─── */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="lg:col-span-5 relative flex justify-center items-center h-[340px] sm:h-[450px] lg:h-[500px]"
+          >
+            {/* Outer dotted accent circle framing the photos */}
+            <div className="absolute w-[80%] aspect-square border border-dashed border-neutral/60 rounded-full scale-110 opacity-60 animate-gear-spin pointer-events-none" />
+
+            {/* Photo stack wrapper */}
+            <div className="relative w-full max-w-[340px] sm:max-w-[420px] aspect-[4/3]">
+              {stackImages.map((img, i) => {
+                const isHovered = hoveredIdx === i;
+                const defaultZIndex = i === 2 ? 20 : i === 0 ? 10 : 0;
+                
+                return (
+                  <motion.div
+                    key={i}
+                    className={img.className}
+                    style={{
+                      transformOrigin: "center center",
+                    }}
+                    animate={{
+                      scale: isHovered ? 1.08 : 1,
+                      rotate: isHovered ? 0 : img.rotate,
+                      zIndex: isHovered ? 40 : defaultZIndex,
+                      boxShadow: isHovered 
+                        ? "0 20px 40px rgba(194, 24, 91, 0.15)" 
+                        : "0 10px 25px rgba(26, 26, 46, 0.08)",
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 22,
+                    }}
+                    onMouseEnter={() => setHoveredIdx(i)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                  >
+                    <div className="relative w-full h-full overflow-hidden rounded-lg">
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        className="w-full h-full object-cover select-none"
+                        draggable="false"
+                      />
+                      {/* Smooth gradient hover overlay to match the theme color */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-royal/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Decorative Sparkle icon floats */}
+            <div className="absolute -top-4 right-10 text-royal/20 animate-pulse pointer-events-none" style={{ animationDuration: "3s" }}>
+              <Sparkles className="h-6 w-6" />
+            </div>
+            <div className="absolute bottom-10 -left-4 text-azure/20 animate-pulse pointer-events-none" style={{ animationDuration: "4s", animationDelay: "1s" }}>
+              <Sparkles className="h-4 w-4" />
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
