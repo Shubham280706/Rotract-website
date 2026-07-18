@@ -43,8 +43,8 @@ export function Nav() {
             alt="Rotaract Bharuch Logo" 
             className={`w-auto object-contain pointer-events-none transition-all duration-300 group-hover:scale-105 ${
               scrolled
-                ? "h-[150px] -my-[56px] md:h-[180px] md:-my-[67px]"
-                : "h-[180px] -my-[67px] md:h-[240px] md:-my-[92px]"
+                ? "h-[180px] -my-[67px] md:h-[220px] md:-my-[82px]"
+                : "h-[220px] -my-[83px] md:h-[280px] md:-my-[106px]"
             }`}
             onError={(e) => {
               // Fallback text if the image is missing from the public folder
