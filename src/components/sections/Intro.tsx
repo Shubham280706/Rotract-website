@@ -42,7 +42,7 @@ const pillars = [
 
 const stackImages = [
   {
-    src: "/projects/charter-installation-ceremony/1.png",
+    src: "/intro/charity.png",
     alt: "Charter installation ceremony",
     className: "absolute top-0 left-0 w-[68%] aspect-[4/3] rounded-xl shadow-md border-4 border-white z-10",
     rotate: -6,
