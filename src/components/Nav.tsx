@@ -27,17 +27,25 @@ export function Nav() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-paper/95 backdrop-blur-md border-b border-neutral shadow-sm py-1"
-          : "bg-transparent py-2"
+          ? "bg-paper/95 backdrop-blur-md border-b border-neutral shadow-sm"
+          : "bg-transparent"
       }`}
     >
-      <nav className="shell relative flex h-20 md:h-24 items-center justify-between transition-all duration-300">
+      <nav
+        className={`shell relative flex items-center justify-between transition-all duration-300 ${
+          scrolled ? "h-14 md:h-16" : "h-16 md:h-20"
+        }`}
+      >
         <a href="#top" className="flex items-center group h-full">
           {/* We point this to /logo.png. Please drop your original logo image into the public/ folder as logo.png! */}
           <img 
             src="/logo.png" 
             alt="Rotaract Bharuch Logo" 
-            className="h-[240px] md:h-[320px] -my-[90px] md:-my-[120px] w-auto object-contain pointer-events-none transition-transform duration-300 group-hover:scale-105"
+            className={`w-auto object-contain pointer-events-none transition-all duration-300 group-hover:scale-105 ${
+              scrolled
+                ? "h-[150px] -my-[56px] md:h-[180px] md:-my-[67px]"
+                : "h-[180px] -my-[67px] md:h-[240px] md:-my-[92px]"
+            }`}
             onError={(e) => {
               // Fallback text if the image is missing from the public folder
               e.currentTarget.style.display = 'none';
