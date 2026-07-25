@@ -37,6 +37,26 @@ export type Project = {
  */
 export const projects: Project[] = [
   {
+    slug: "helping-in-rain",
+    title: "Helping in Rain",
+    avenue: "Community",
+    date: "July 2026",
+    summary:
+      "When our community needed support the most, the members of Rotaract Club of Bharuch stepped forward to make a difference.\n\nThrough a food distribution drive, we reached out to families affected by the heavy rainfall, sharing not just meals but also hope and care.\n\nSmall acts of kindness can make the biggest impact.",
+    impact: "Food Distribution Drive for Rain-Affected Families",
+    images: [
+      "/projects/Helping-In-Rain/WhatsApp Image 2026-07-24 at 12.19.42.jpeg",
+      "/projects/Helping-In-Rain/WhatsApp Image 2026-07-24 at 12.19.42 (1).jpeg",
+      "/projects/Helping-In-Rain/WhatsApp Image 2026-07-24 at 12.19.43.jpeg",
+      "/projects/Helping-In-Rain/WhatsApp Image 2026-07-24 at 12.19.43 (1).jpeg",
+      "/projects/Helping-In-Rain/WhatsApp Image 2026-07-24 at 12.19.44.jpeg",
+      "/projects/Helping-In-Rain/WhatsApp Image 2026-07-24 at 12.19.44 (1).jpeg",
+      "/projects/Helping-In-Rain/WhatsApp Image 2026-07-24 at 12.19.45.jpeg",
+      "/projects/Helping-In-Rain/WhatsApp Image 2026-07-24 at 12.19.45 (1).jpeg",
+      "/projects/Helping-In-Rain/WhatsApp Image 2026-07-24 at 12.19.45 (2).jpeg",
+    ],
+  },
+  {
     slug: "general-meeting",
     title: "First General Meeting",
     avenue: "Club Service",
