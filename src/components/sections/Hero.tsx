@@ -17,7 +17,7 @@ export function Hero() {
       {/* ============================================================
           MOBILE HERO VIEW (< sm / < 640px)
           - Background image covers full mobile screen (absolute inset-0)
-          - Entire hero content perfectly centered vertically in the page
+          - Main heading "Rotaract Club of Bharuch" is placed in exact optical center of page
           - Uses EXACT same laptop fonts (display, text-ink, text-royal, mono-label, btn)
          ============================================================ */}
       <div className="relative min-h-[100svh] flex flex-col justify-between overflow-hidden bg-paper sm:hidden">
@@ -48,11 +48,11 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Mobile Content Container — Centered Vertically in Page */}
-        <div className="shell relative z-10 flex-1 flex flex-col justify-center items-center py-20">
-          <div className="w-full max-w-md mx-auto flex flex-col items-center text-center my-auto">
-            {/* 1. Main Title */}
-            <h1 className="display text-[clamp(2.9rem,10vw,4.8rem)] text-ink text-center leading-[0.98]">
+        {/* Mobile Content Container — Centered Vertically in Page Viewport */}
+        <div className="shell relative z-10 flex-1 flex flex-col justify-center items-center pt-16 pb-12 min-h-[100svh]">
+          <div className="w-full max-w-md mx-auto flex flex-col items-center justify-center text-center my-auto">
+            {/* 1. Main Title (Placed in Optical Center) */}
+            <h1 className="display text-[clamp(3.1rem,10.5vw,5.2rem)] text-ink text-center leading-[0.98]">
               <WordReveal words={["Rotaract", "Club"]} />
               <br />
               <WordReveal
@@ -62,25 +62,25 @@ export function Hero() {
               />
             </h1>
 
-            {/* 2. Accent Line + Dot */}
+            {/* 2. Accent Line + Dot (Centered) */}
             <div className="mt-4 flex items-center justify-center gap-2">
               <div className="w-10 h-[3px] bg-royal rounded-full" />
               <div className="w-2 h-2 rounded-full bg-royal shadow-[0_0_8px_var(--color-royal)]" />
             </div>
 
-            {/* 3. Subtitle Tagline */}
-            <p className="mono-label text-royal mt-3 tracking-widest text-center">
+            {/* 3. Subtitle Tagline (Centered) */}
+            <p className="mono-label text-royal mt-2.5 tracking-widest text-center">
               Service Above Self
             </p>
 
-            {/* 4. Description Paragraph */}
+            {/* 4. Description Paragraph (Centered) */}
             <Reveal as="div" index={1}>
               <p className="mt-4 text-base leading-relaxed text-ink/75 text-center max-w-[92%] mx-auto">
                 Sponsored by {club.sponsorClub} · RI District {club.riDistrict} · Rotary Year {club.rotaryYear} · Club ID {club.clubId}
               </p>
             </Reveal>
 
-            {/* 5. Action Buttons (Positioned directly below description) */}
+            {/* 5. Action Buttons */}
             <Reveal as="div" index={2} className="mt-7 flex flex-row items-center justify-center gap-3.5 w-full">
               <Magnetic>
                 <a
@@ -105,14 +105,14 @@ export function Hero() {
               </Magnetic>
             </Reveal>
           </div>
-        </div>
 
-        {/* Scroll Indicator */}
-        <div className="relative z-10 pb-5 pt-1 flex items-center justify-center gap-2 pointer-events-none">
-          <div className="w-1.5 h-1.5 rounded-full bg-royal animate-ping" />
-          <span className="mono-label text-ink/50 text-[10px] tracking-[6px]">
-            Scroll to explore
-          </span>
+          {/* Scroll Indicator (Pinned to bottom so it doesn't offset the optical center) */}
+          <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2 pointer-events-none z-10">
+            <div className="w-1.5 h-1.5 rounded-full bg-royal animate-ping" />
+            <span className="mono-label text-ink/50 text-[10px] tracking-[6px]">
+              Scroll to explore
+            </span>
+          </div>
         </div>
       </div>
 
