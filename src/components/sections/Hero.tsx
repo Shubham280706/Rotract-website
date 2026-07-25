@@ -5,182 +5,191 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { club } from "@/content/club";
 import { Magnetic } from "@/components/Magnetic";
-
-const PARTICLES = [
-  { top: "12%", left: "15%", size: "w-1.5 h-1.5", duration: 7, delay: 0 },
-  { top: "28%", left: "80%", size: "w-2 h-2", duration: 9, delay: 1.2 },
-  { top: "42%", left: "10%", size: "w-1 h-1", duration: 6, delay: 2.1 },
-  { top: "65%", left: "88%", size: "w-2 h-2", duration: 8.5, delay: 0.5 },
-  { top: "78%", left: "25%", size: "w-1.5 h-1.5", duration: 7.5, delay: 1.8 },
-  { top: "35%", left: "55%", size: "w-1 h-1", duration: 6.8, delay: 2.8 },
-];
+import { Reveal } from "@/components/Reveal";
+import { WordReveal } from "@/components/WordReveal";
 
 export function Hero() {
   const { scrollY } = useScroll();
-  const illustrationY = useTransform(scrollY, [0, 500], [0, 60]);
+  const illustrationY = useTransform(scrollY, [0, 400], [0, 40]);
 
   return (
-    <section id="top" className="relative min-h-[100svh] flex flex-col justify-between overflow-hidden bg-white">
-      {/* 1. Background Layers */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#FFFFFF] via-[#FFF8FB] to-[#FCE6F1] pointer-events-none" />
+    <section id="top" className="relative overflow-hidden">
+      {/* ============================================================
+          MOBILE HERO VIEW (< sm / < 640px)
+          - Background image covers full mobile screen (absolute inset-0)
+          - Entire hero content perfectly centered vertically in the page
+          - Uses EXACT same laptop fonts (display, text-ink, text-royal, mono-label, btn)
+         ============================================================ */}
+      <div className="relative min-h-[100svh] flex flex-col justify-between overflow-hidden bg-paper sm:hidden">
+        {/* Subtle Ambient Background Tint */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,color-mix(in_srgb,var(--color-royal)_6%,transparent),transparent_75%)] pointer-events-none z-0" />
 
-      {/* Subtle radial glow behind hero content */}
-      <motion.div
-        animate={{ scale: [1, 1.06, 1], opacity: [0.5, 0.85, 0.5] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95vw] max-w-[700px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(212,20,90,0.14)_0%,rgba(252,230,241,0.5)_50%,transparent_75%)] blur-3xl z-0"
-      />
-
-      {/* Top-left light dotted pattern */}
-      <div className="pointer-events-none absolute top-0 left-0 w-48 h-48 sm:w-64 sm:h-64 bg-[radial-gradient(#D4145A_1.2px,transparent_1.2px)] [background-size:16px_16px] opacity-15 [mask-image:radial-gradient(ellipse_at_top_left,black_30%,transparent_75%)] z-0" />
-
-      {/* Floating light particles */}
-      {PARTICLES.map((particle, idx) => (
+        {/* FULL-SCREEN BACKGROUND IMAGE (Covers whole mobile screen) */}
         <motion.div
-          key={idx}
-          style={{ top: particle.top, left: particle.left }}
-          animate={{
-            y: [0, -18, 0],
-            opacity: [0.15, 0.45, 0.15],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: "easeInOut",
-          }}
-          className={`pointer-events-none absolute rounded-full bg-[#D4145A] shadow-[0_0_8px_rgba(212,20,90,0.6)] ${particle.size} z-0`}
-        />
-      ))}
-
-      {/* 2. Main Hero Content Container */}
-      <div className="shell relative z-10 flex-1 flex flex-col justify-center pt-24 sm:pt-28 pb-16">
-        <div className="max-w-3xl mx-auto sm:mx-0 text-left">
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
-            className="font-black text-[#0D1329] text-[clamp(2.7rem,8.5vw,5.5rem)] leading-[1.02] tracking-tight"
+          style={{ y: illustrationY }}
+          className="pointer-events-none absolute inset-0 w-full h-full z-0 overflow-hidden"
+        >
+          <div
+            className="relative w-full h-full opacity-20 mix-blend-multiply"
+            style={{
+              maskImage:
+                "radial-gradient(ellipse 95% 85% at 50% 50%, black 40%, transparent 98%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 95% 85% at 50% 50%, black 40%, transparent 98%)",
+            }}
           >
-            Rotaract Club <br />
-            of <span className="text-[#D4145A]">Bharuch</span>
-          </motion.h1>
+            <Image
+              src="/bharuch-illustration.png"
+              alt=""
+              fill
+              priority
+              className="object-cover object-center sepia-[0.2] saturate-[1.2]"
+            />
+          </div>
+        </motion.div>
 
-          {/* Accent Line + Glowing Pink Dot */}
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.5, delay: 0.25, ease: "easeOut" }}
-            className="origin-left mt-5 flex items-center gap-2.5"
-          >
-            <div className="w-12 h-[3.5px] bg-[#D4145A] rounded-full" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#D4145A] shadow-[0_0_10px_#D4145A]" />
-          </motion.div>
+        {/* Mobile Content Container — Centered Vertically in Page */}
+        <div className="shell relative z-10 flex-1 flex flex-col justify-center items-center py-20">
+          <div className="w-full max-w-md mx-auto flex flex-col items-center text-center my-auto">
+            {/* 1. Main Title */}
+            <h1 className="display text-[clamp(2.9rem,10vw,4.8rem)] text-ink text-center leading-[0.98]">
+              <WordReveal words={["Rotaract", "Club"]} />
+              <br />
+              <WordReveal
+                words={["of", "Bharuch"]}
+                startIndex={2}
+                wordClassName={(w) => (w === "Bharuch" ? "text-royal" : undefined)}
+              />
+            </h1>
 
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
-            className="mt-3 text-[18px] sm:text-xl font-medium text-[#64748B]"
-          >
-            Service Above Self
-          </motion.p>
+            {/* 2. Accent Line + Dot */}
+            <div className="mt-4 flex items-center justify-center gap-2">
+              <div className="w-10 h-[3px] bg-royal rounded-full" />
+              <div className="w-2 h-2 rounded-full bg-royal shadow-[0_0_8px_var(--color-royal)]" />
+            </div>
 
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
-            className="mt-5 max-w-[90%] sm:max-w-xl text-[16px] leading-[1.7] text-[#475569]"
-          >
-            Sponsored by {club.sponsorClub} · RI District {club.riDistrict} · Rotary Year {club.rotaryYear} · Club ID {club.clubId} · Chartered {club.charterDate}
-          </motion.p>
+            {/* 3. Subtitle Tagline */}
+            <p className="mono-label text-royal mt-3 tracking-widest text-center">
+              Service Above Self
+            </p>
 
-          {/* Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
-            className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
-          >
-            <Magnetic>
-              <a
-                href="#projects"
-                className="w-full sm:w-auto min-h-[50px] px-7 py-3.5 flex items-center justify-center gap-2.5 rounded-[16px] bg-[#D4145A] hover:bg-[#B80F4D] text-white font-semibold text-[15px] shadow-[0_8px_25px_rgba(212,20,90,0.25)] hover:-translate-y-0.5 transition-all duration-300 group"
-              >
-                See our work
-                <ArrowDown className="h-4 w-4 group-hover:translate-y-0.5 transition-transform" />
-              </a>
-            </Magnetic>
+            {/* 4. Description Paragraph */}
+            <Reveal as="div" index={1}>
+              <p className="mt-4 text-base leading-relaxed text-ink/75 text-center max-w-[92%] mx-auto">
+                Sponsored by {club.sponsorClub} · RI District {club.riDistrict} · Rotary Year {club.rotaryYear} · Club ID {club.clubId}
+              </p>
+            </Reveal>
 
-            <Magnetic>
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLScdyBV2EqcsHkYlLOlOwfYR2KWfpKIBa55HtzIEPlZLkQj21g/viewform?fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacXMrhXijSbwLbI4RNaACF0QJnGVH2bw0ADAn22m3bXIkkV4YhAG_7UHxr0Rg_aem_SO--CmroTYft_2yJddrSwg"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto min-h-[50px] px-7 py-3.5 flex items-center justify-center gap-2.5 rounded-[16px] bg-white border border-[#D4145A] text-[#0D1329] hover:bg-[#D4145A] hover:text-white font-semibold text-[15px] hover:-translate-y-0.5 transition-all duration-300 group"
-              >
-                Join us
-                <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-            </Magnetic>
-          </motion.div>
+            {/* 5. Action Buttons (Positioned directly below description) */}
+            <Reveal as="div" index={2} className="mt-7 flex flex-row items-center justify-center gap-3.5 w-full">
+              <Magnetic>
+                <a
+                  href="#projects"
+                  className="btn btn-primary px-5 py-2.5 text-xs font-semibold rounded-full shadow-sm text-center"
+                >
+                  See our work
+                  <ArrowDown className="h-3.5 w-3.5" />
+                </a>
+              </Magnetic>
+
+              <Magnetic>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLScdyBV2EqcsHkYlLOlOwfYR2KWfpKIBa55HtzIEPlZLkQj21g/viewform?fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacXMrhXijSbwLbI4RNaACF0QJnGVH2bw0ADAn22m3bXIkkV4YhAG_7UHxr0Rg_aem_SO--CmroTYft_2yJddrSwg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary px-5 py-2.5 text-xs font-semibold rounded-full text-center"
+                >
+                  Join us
+                  <ArrowUpRight className="h-3.5 w-3.5 opacity-75" />
+                </a>
+              </Magnetic>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="relative z-10 pb-5 pt-1 flex items-center justify-center gap-2 pointer-events-none">
+          <div className="w-1.5 h-1.5 rounded-full bg-royal animate-ping" />
+          <span className="mono-label text-ink/50 text-[10px] tracking-[6px]">
+            Scroll to explore
+          </span>
         </div>
       </div>
 
-      {/* 3. Bharuch Landmark Illustration Watermark */}
-      <motion.div
-        style={{ y: illustrationY }}
-        className="pointer-events-none absolute bottom-12 sm:bottom-6 left-1/2 -translate-x-1/2 w-[120vw] sm:w-[85vw] max-w-[1100px] h-[200px] sm:h-[300px] z-0 overflow-hidden"
-      >
+      {/* ============================================================
+          DESKTOP / TABLET / LAPTOP HERO VIEW (>= sm / >= 640px)
+          Original Unchanged Desktop Layout
+         ============================================================ */}
+      <div className="hidden sm:block relative min-h-[100svh]">
+        {/* Ambient blueprint field */}
+        <div className="blueprint absolute inset-0" aria-hidden />
+
+        {/* Signature: Bharuch landmark illustration, faded into the paper backdrop */}
         <div
-          className="relative w-full h-full opacity-[0.14]"
+          className="pointer-events-none absolute -right-[2%] top-0 h-full w-[68vw] max-w-[880px]"
           style={{
             maskImage:
-              "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 60%, transparent 100%), linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
+              "radial-gradient(ellipse 70% 70% at 65% 50%, black 20%, transparent 80%)",
             WebkitMaskImage:
-              "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 60%, transparent 100%), linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
+              "radial-gradient(ellipse 70% 70% at 65% 50%, black 20%, transparent 80%)",
           }}
+          aria-hidden
         >
           <Image
             src="/bharuch-illustration.png"
             alt=""
             fill
             priority
-            className="object-contain object-bottom filter sepia-[0.3] hue-rotate-[315deg] saturate-[2.5] brightness-[0.9] blur-[1px]"
+            className="object-contain object-center opacity-80 sepia-[0.15] saturate-[0.85] transition-opacity duration-300"
           />
         </div>
-      </motion.div>
 
-      {/* 4. Scroll Indicator */}
-      <div className="relative z-20 pb-8 pt-2 flex flex-col items-center justify-center gap-2 pointer-events-none">
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="w-5 h-8 rounded-full border-2 border-[#0D1329]/40 flex items-start justify-center p-1"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-            className="w-1.5 h-1.5 rounded-full bg-[#D4145A]"
-          />
-        </motion.div>
-        <span className="mono-label text-[10px] tracking-[8px] text-[#0D1329]/60 font-semibold pl-[8px]">
-          SCROLL TO EXPLORE
-        </span>
-      </div>
+        <div className="shell relative flex min-h-[100svh] flex-col justify-center pt-28 pb-20">
+          <h1 className="display max-w-4xl text-[clamp(2.9rem,9vw,6.6rem)] text-ink">
+            <WordReveal words={["Rotaract", "Club"]} />
+            <br />
+            <WordReveal
+              words={["of", "Bharuch"]}
+              startIndex={2}
+              wordClassName={(w) => (w === "Bharuch" ? "text-royal" : undefined)}
+            />
+          </h1>
 
-      {/* 5. Bottom Wave Transition */}
-      <div className="relative w-full overflow-hidden leading-none z-20 pointer-events-none -mb-px">
-        <svg
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-          className="relative block w-full h-8 sm:h-12 text-white fill-current"
-        >
-          <path d="M0,0 C150,60 350,-30 500,40 C650,110 900,20 1200,35 L1200,120 L0,120 Z"></path>
-        </svg>
+          <Reveal as="div" index={1}>
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink/75 sm:text-xl">
+              Sponsored by {club.sponsorClub} · RI District {club.riDistrict} · Rotary
+              Year {club.rotaryYear} · Club ID {club.clubId} · Chartered{" "}
+              {club.charterDate}
+            </p>
+          </Reveal>
+
+          <Reveal as="div" index={2} className="mt-10 flex flex-wrap items-center gap-4">
+            <Magnetic>
+              <a href="#projects" className="btn btn-primary">
+                See our work
+                <ArrowDown className="h-4 w-4" />
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLScdyBV2EqcsHkYlLOlOwfYR2KWfpKIBa55HtzIEPlZLkQj21g/viewform?fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacXMrhXijSbwLbI4RNaACF0QJnGVH2bw0ADAn22m3bXIkkV4YhAG_7UHxr0Rg_aem_SO--CmroTYft_2yJddrSwg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+              >
+                Join us
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </Magnetic>
+          </Reveal>
+
+          <div className="absolute bottom-8 left-0 right-0">
+            <div className="shell flex items-center gap-3">
+              <span className="h-px flex-1 bg-neutral" aria-hidden />
+              <span className="mono-label text-ink/50">Scroll to explore</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

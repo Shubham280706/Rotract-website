@@ -57,6 +57,23 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "jagannath-amrit-seva",
+    title: "Jagannath Amrit Seva",
+    avenue: "Community",
+    date: "July 2026",
+    summary:
+      "Jay Jagannath 🙏🏻\n\nWith hearts full of devotion and a spirit of service, We successfully organized “Jagannath Amrit Seva”, spreading joy and serving the community on the auspicious occasion of Jagannath Rath Yatra.\n\nMay Lord Jagannath continue to bless us all with peace, prosperity, and the strength to serve humanity. ✨\n\nServing Devotion. Spreading Happiness. Uniting Hearts.",
+    impact: "Serving Devotion & Spreading Joy during Rath Yatra",
+    images: [
+      "/projects/Jagannath Amrit Seva/IMG-20260720-WA0049.jpg",
+      "/projects/Jagannath Amrit Seva/IMG-20260720-WA0033.jpg",
+      "/projects/Jagannath Amrit Seva/IMG-20260720-WA0036.jpg",
+      "/projects/Jagannath Amrit Seva/IMG-20260720-WA0041.jpg",
+      "/projects/Jagannath Amrit Seva/IMG-20260720-WA0032.jpg",
+      "/projects/Jagannath Amrit Seva/IMG-20260720-WA0050.jpg",
+    ],
+  },
+  {
     slug: "general-meeting",
     title: "First General Meeting",
     avenue: "Club Service",
