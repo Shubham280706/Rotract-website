@@ -15,12 +15,12 @@ export function Hero() {
 
       {/* Signature: Bharuch landmark illustration, faded into the paper backdrop */}
       <div
-        className="pointer-events-none absolute -right-[6%] top-0 h-full w-[68vw] max-w-[880px] sm:-right-[2%]"
+        className="pointer-events-none absolute -right-[10%] top-0 h-full w-[85vw] max-w-[880px] sm:-right-[2%] sm:w-[68vw]"
         style={{
           maskImage:
-            "radial-gradient(ellipse 62% 60% at 58% 46%, black 30%, transparent 76%)",
+            "radial-gradient(ellipse 70% 70% at 65% 50%, black 20%, transparent 80%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse 62% 60% at 58% 46%, black 30%, transparent 76%)",
+            "radial-gradient(ellipse 70% 70% at 65% 50%, black 20%, transparent 80%)",
         }}
         aria-hidden
       >
@@ -29,7 +29,7 @@ export function Hero() {
           alt=""
           fill
           priority
-          className="object-contain object-center opacity-80 sepia-[0.15] saturate-[0.85]"
+          className="object-contain object-center opacity-25 sm:opacity-80 sepia-[0.15] saturate-[0.85] transition-opacity duration-300"
         />
       </div>
 
