@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rotbharuch.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rotaractbharuch.vercel.app";
   const mainImage = project.images?.[0] ? `${siteUrl}${project.images[0]}` : `${siteUrl}/logo.png`;
 
   return {

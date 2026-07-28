@@ -23,7 +23,7 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rotbharuch.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rotaractbharuch.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
