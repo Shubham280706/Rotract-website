@@ -39,17 +39,17 @@ export function Nav() {
         <a href="#top" className="flex items-center group h-full relative z-10">
           <img 
             src="/logo.png" 
-            alt="Rotaract Bharuch Logo" 
+            alt="Rotaract District 3060 Logo" 
             className={`w-auto object-contain pointer-events-none transition-all duration-300 group-hover:scale-105 ${
               scrolled
-                ? "h-[180px] -my-[67px] md:h-[220px] md:-my-[82px]"
-                : "h-[220px] -my-[83px] md:h-[280px] md:-my-[106px]"
+                ? "h-9 md:h-10"
+                : "h-10 md:h-12"
             }`}
             onError={(e) => {
               e.currentTarget.style.display = 'none';
               e.currentTarget.parentElement?.insertAdjacentHTML(
                 'beforeend', 
-                `<span class="display text-lg md:text-xl font-bold text-ink">Please add logo.png to public/</span>`
+                `<span class="display text-lg md:text-xl font-bold text-ink">Rotaract District 3060</span>`
               );
             }}
           />
