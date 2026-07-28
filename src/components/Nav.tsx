@@ -33,17 +33,17 @@ export function Nav() {
     >
       <nav
         className={`shell relative flex items-center justify-between transition-all duration-300 ${
-          scrolled ? "h-14 md:h-16" : "h-16 md:h-20"
+          scrolled ? "h-16 md:h-20" : "h-20 md:h-24"
         }`}
       >
-        <a href="#top" className="flex items-center group h-full relative z-10">
+        <a href="#top" className="flex items-center group h-full relative z-10 py-2">
           <img 
             src="/logo.png" 
             alt="Rotaract District 3060 Logo" 
             className={`w-auto object-contain pointer-events-none transition-all duration-300 group-hover:scale-105 ${
               scrolled
-                ? "h-9 md:h-10"
-                : "h-10 md:h-12"
+                ? "h-12 md:h-14 lg:h-16"
+                : "h-14 md:h-16 lg:h-20"
             }`}
             onError={(e) => {
               e.currentTarget.style.display = 'none';
