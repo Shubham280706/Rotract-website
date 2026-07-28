@@ -8,6 +8,8 @@ import { Gear } from "@/components/Gear";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { FeaturedImageSlideshow } from "@/components/FeaturedImageSlideshow";
 
+import type { Metadata } from "next";
+
 interface Props {
   params: Promise<{
     slug: string;
@@ -18,6 +20,47 @@ export async function generateStaticParams() {
   return projects.map((p) => ({
     slug: p.slug,
   }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found",
+    };
+  }
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rotbharuch.vercel.app";
+  const mainImage = project.images?.[0] ? `${siteUrl}${project.images[0]}` : `${siteUrl}/logo.png`;
+
+  return {
+    title: project.title,
+    description: project.summary.replace(/\n+/g, " ").slice(0, 160),
+    openGraph: {
+      title: `${project.title} · Rotaract Club of Bharuch`,
+      description: project.summary.replace(/\n+/g, " ").slice(0, 160),
+      url: `${siteUrl}/projects/${project.slug}`,
+      siteName: "Rotaract Club of Bharuch",
+      images: [
+        {
+          url: mainImage,
+          alt: project.title,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} · Rotaract Club of Bharuch`,
+      description: project.summary.replace(/\n+/g, " ").slice(0, 160),
+      images: [mainImage],
+    },
+    alternates: {
+      canonical: `${siteUrl}/projects/${project.slug}`,
+    },
+  };
 }
 
 export default async function ProjectPage({ params }: Props) {

@@ -23,39 +23,75 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://rotaractbharuch.org";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rotbharuch.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Rotaract Club of Bharuch — Fellowship Through Service",
+    default: "Rotaract Club of Bharuch — Service Above Self · RI District 3060",
     template: "%s · Rotaract Club of Bharuch",
   },
   description:
-    "Rotaract Club of Bharuch is a youth service club for people aged 18–30, sponsored by the Rotary Club of Bharuch. Community service, leadership, and fellowship in Bharuch, Gujarat.",
+    "Official website of Rotaract Club of Bharuch (RI District 3060). Empowering youth, organizing community service, blood donation drives, tree plantations, and leadership initiatives in Bharuch, Gujarat.",
   keywords: [
     "Rotaract",
     "Rotaract Club of Bharuch",
     "Rotary Club of Bharuch",
+    "Rotaract District 3060",
+    "RI District 3060",
     "community service Bharuch",
+    "NGO Bharuch",
     "youth service club Gujarat",
+    "Helping in Rain Bharuch",
+    "Jagannath Amrit Seva Bharuch",
+    "fellowship service Bharuch",
   ],
+  authors: [{ name: "Rotaract Club of Bharuch" }],
+  creator: "Rotaract Club of Bharuch",
+  publisher: "Rotaract Club of Bharuch",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: "Rotaract Club of Bharuch — Fellowship Through Service",
+    title: "Rotaract Club of Bharuch — Service Above Self · RI District 3060",
     description:
-      "A youth service club for people aged 18–30 in Bharuch, Gujarat. Sponsored by the Rotary Club of Bharuch.",
+      "Official website of Rotaract Club of Bharuch. Community service drives, leadership initiatives, and youth fellowship in Bharuch, Gujarat.",
     url: siteUrl,
     siteName: "Rotaract Club of Bharuch",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Rotaract Club of Bharuch Logo",
+      },
+    ],
     locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rotaract Club of Bharuch — Fellowship Through Service",
+    title: "Rotaract Club of Bharuch — Service Above Self",
     description:
-      "A youth service club for people aged 18–30 in Bharuch, Gujarat. Sponsored by the Rotary Club of Bharuch.",
+      "Official website of Rotaract Club of Bharuch (RI District 3060). Youth leadership & community service in Bharuch, Gujarat.",
+    images: ["/logo.png"],
   },
-  alternates: { canonical: siteUrl },
+  alternates: {
+    canonical: siteUrl,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -67,9 +103,12 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "NGO",
     name: club.name,
+    alternateName: "Rotaract Bharuch",
     description:
-      "A youth service club for people aged 18–30, sponsored by the Rotary Club of Bharuch.",
+      "A youth service organization for people aged 18–30, sponsored by Rotary Club of Bharuch in RI District 3060.",
     url: siteUrl,
+    logo: `${siteUrl}/logo.png`,
+    image: `${siteUrl}/logo.png`,
     parentOrganization: {
       "@type": "Organization",
       name: club.sponsorClub,
