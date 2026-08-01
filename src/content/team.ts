@@ -35,7 +35,7 @@ export const team: TeamMember[] = [
   { name: "Rtr. Prexa Mahant", role: "Editor", order: 25, isBoard: true, photo: "/team/6.jpg" },
   { name: "Rtr. Janvi Bhojwani", role: "Public Image Chair", order: 26, isBoard: true, photo: "/team/7.jpg" },
   { name: "Rtr. Dhruv Shah", role: "TRF Promotion Chair", order: 27, isBoard: true, photo: "/team/8.jpg" },
-  { name: "Rtr. Karamrajsinhji Raulji", role: "Youth Service Chair / RYLC", order: 28, isBoard: true, photo: "/team/9.jpg" },
+  { name: "Rtr. Karmrajsinhji Raulji", role: "Youth Service Chair / RYLC", order: 28, isBoard: true, photo: "/team/9.jpg" },
   { name: "Rtr. Grishma Shah", role: "Service Project Chair", order: 29, isBoard: true, photo: "/team/10.jpg" },
   { name: "Rtr. Deval Mehta", role: "Professional Service Chair", order: 30, isBoard: true, photo: "/team/11.jpg" },
   { name: "Rtr. Harmandeep Singh Bunet", role: "International Service Chair", order: 31, isBoard: true, photo: "/team/12.jpg" },
